@@ -1,0 +1,783 @@
+OpenBh Enigma2 Crashlog
+
+Crashdate = Sun Dec 26 17:06:29 2021
+
+Creator = OpenBh
+Version = 5.0
+Build = 006
+Type = release
+Machine = sf8008
+URL = http://www.openbh.net
+distro=openbh
+compile-date=20211222
+compile-datetime=20211222223835
+Compiled = Dec 26 2021
+Skin = BlackShadowSE_P/skin.xml
+Component = Enigma2
+
+Kernel CMDline = console=ttyAMA0,115200 root=/dev/mmcblk0p16 rootsubdir=linuxrootfs3 rootfstype=ext4 kernel=/dev/mmcblk0p14 userdataroot=/dev/mmcblk0p16 userdatasubdir=userdata3 blkdevparts=mmcblk0:1M(boot),1M(bootargs),1M(bootoptions),3M(baseparam),4M(pqparam),4M(logo),4M(deviceinfo),4M(softwareinfo),4M(loaderdb),32M(loader),8M(trustedcore),16M(linuxkernel1),16M(linuxkernel2),16M(linuxkernel3),16M(linuxkernel4),-(userdata) coherent_pool=2M mem=1G mmz=ddr,0,0,72M vmalloc=500M MACHINEBUILD=sf8008 OEM=octagon MODEL=sf8008
+Nim Sockets = NIM Socket 0:
+Type: DVB-S2X
+Name: Si2166D
+Has_Outputs: no
+Frontend_Device: 0
+I2C_Device: 0
+NIM Socket 1:
+Type: DVB-S2X
+Name: Si2166D
+Has_Outputs: no
+Frontend_Device: 1
+I2C_Device: 1
+
+
+set sequence pos -4
+<   161.4462> 17:06:22.2670 [eDVBFrontend0] sleep 250ms
+<   161.6970> 17:06:22.5179 [eDVBFrontend0] locked step 0 ok
+<   161.6971> 17:06:22.5180 [eDVBFrontend0] set sequence pos -4
+<   161.6971> 17:06:22.5180 [eDVBFrontend0] sleep 250ms
+<   161.9479> 17:06:22.7687 [eDVBFrontend0] locked step 1 ok
+<   161.9480> 17:06:22.7688 [eDVBFrontend0] set sequence pos -4
+<   161.9480> 17:06:22.7689 [eDVBFrontend0] sleep 250ms
+<   162.1988> 17:06:23.0196 [eDVBFrontend0] locked step 2 ok
+<   162.1989> 17:06:23.0197 [eDVBFrontend0] set sequence pos -4
+<   162.1989> 17:06:23.0198 [eDVBFrontend0] sleep 250ms
+<   162.4498> 17:06:23.2706 [eDVBFrontend0] locked step 3 ok
+<   162.4499> 17:06:23.2708 [eDVBFrontend0] set sequence pos -4
+<   162.4499> 17:06:23.2708 [eDVBFrontend0] sleep 250ms
+<   162.7007> 17:06:23.5216 [eDVBFrontend0] locked step 4 ok
+<   162.7008> 17:06:23.5216 [eDVBFrontend0] ok > 4 .. goto 4
+
+<   162.7008> 17:06:23.5217 [eDVBFrontend0] set sequence pos 4
+<   162.7008> 17:06:23.5217 [eDVBChannel] OURSTATE: ok
+<   162.7008> 17:06:23.5217 [eDVBLocalTimerHandler] channel 0x1b55ff0 running
+<   162.7008> 17:06:23.5217 [eDVBChannel] getDemux cap=00
+<   162.7009> 17:06:23.5217 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7010> 17:06:23.5218 [eDVBSectionReader] DMX_SET_FILTER pid=20
+<   162.7013> 17:06:23.5221 [eEPGTransponderDataReader] channel 0x1b55ff0 running
+<   162.7013> 17:06:23.5222 [eDVBChannel] getDemux cap=00
+<   162.7013> 17:06:23.5222 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7014> 17:06:23.5222 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7014> 17:06:23.5222 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7014> 17:06:23.5223 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7014> 17:06:23.5223 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7015> 17:06:23.5223 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7015> 17:06:23.5224 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7015> 17:06:23.5224 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7016> 17:06:23.5224 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7016> 17:06:23.5224 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7016> 17:06:23.5225 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7016> 17:06:23.5225 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7017> 17:06:23.5225 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7017> 17:06:23.5225 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7017> 17:06:23.5226 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7017> 17:06:23.5226 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7018> 17:06:23.5226 [eDVBResourceManager] stop release channel timer
+<   162.7018> 17:06:23.5227 [eDVBChannel] getDemux cap=01
+<   162.7018> 17:06:23.5227 [eDVBResourceManager] allocate demux cap=01
+<   162.7018> 17:06:23.5227 [eDVBResourceManager] allocating shared demux adapter=0, demux=0, source=0
+<   162.7018> 17:06:23.5227 [eDVBServicePMTHandler] ok ... now we start!!
+<   162.7018> 17:06:23.5227 [eDVBServicePlay] eventNewProgramInfo timeshift_enabled=0 timeshift_active=0
+<   162.7019> 17:06:23.5227 [eEPGChannelData] next update in 2 sec
+<   162.7019> 17:06:23.5227 [eDVBServicePlay] have 1 video stream(s) (0200), and 1 audio stream(s) (1010), and the pcr pid is 0200, and the text pid is ffffffff
+<   162.7019> 17:06:23.5228 [eDVBChannel] getDemux cap=01
+<   162.7019> 17:06:23.5228 [decoder][eDVBText] initCache
+<   162.7066> 17:06:23.5275 [eTSMPEGDecoder] decoder state: play, vpid=0200, apid=1010
+<   162.7067> 17:06:23.5275 [eDVBPCR0] DMX_SET_PES_FILTER pid=0x0200 ok
+<   162.7067> 17:06:23.5275 [eDVBPCR0] DEMUX_START ok
+<   162.7067> 17:06:23.5276 [eDVBAudio0] DMX_SET_PES_FILTER pid=0x1010 ok
+<   162.7068> 17:06:23.5276 [eDVBAudio0] DEMUX_START ok
+<   162.7068> 17:06:23.5276 [eDVBAudio0] AUDIO_SET_BYPASS bypass=1 ok
+<   162.7068> 17:06:23.5277 [eDVBAudio0] AUDIO_PAUSE ok
+<   162.7068> 17:06:23.5277 [eDVBAudio0] AUDIO_PLAY ok
+<   162.7068> 17:06:23.5277 [eDVBVideo] Video Device: /dev/dvb/adapter0/video0
+<   162.7069> 17:06:23.5277 [eDVBVideo] demux device: /dev/dvb/adapter0/demux0
+<   162.7069> 17:06:23.5278 [eDVBVideo0] VIDEO_SET_STREAMTYPE 1 - ok
+<   162.7069> 17:06:23.5278 [eDVBVideo0] DMX_SET_PES_FILTER pid=0x0200 ok
+<   162.7069> 17:06:23.5278 [eDVBVideo0] DEMUX_START ok
+<   162.7070> 17:06:23.5279 [eDVBVideo0] VIDEO_FREEZE ok
+<   162.7070> 17:06:23.5279 [eDVBVideo0] VIDEO_PLAY ok
+<   162.7070> 17:06:23.5279 [decoder][eDVBText] resetPID
+<   162.7070> 17:06:23.5279 [eDVBVideo0] VIDEO_SLOWMOTION 0 ok
+<   162.7071> 17:06:23.5279 [eDVBVideo0] VIDEO_FAST_FORWARD 0 ok
+<   162.7071> 17:06:23.5279 [eDVBVideo0] VIDEO_CONTINUE ok
+<   162.7071> 17:06:23.5279 [eDVBAudio0] AUDIO_CONTINUE ok
+<   162.7071> 17:06:23.5280 [eDVBAudio0] AUDIO_CHANNEL_SELECT 0 ok
+<   162.7071> 17:06:23.5280 [servicedvb][eDVBServicePlay] m_teletext_parser active
+<   162.7071> 17:06:23.5280 [eDVBTeletextParser] Starting!
+<   162.7071> 17:06:23.5280 [eDVBTeletextParser] disable teletext subtitles page ffffffffffffffff (und)
+<   162.7071> 17:06:23.5280 [eDVBPESReader] Created. Opening demux
+<   162.7072> 17:06:23.5280 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7073> 17:06:23.5282 [eDVBTeletextParser] created teletext subtitle PES reader!
+<   162.7073> 17:06:23.5282 [eDVBPESReader] Created. Opening demux
+<   162.7074> 17:06:23.5282 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7074> 17:06:23.5283 [eDVBTeletextParser] starting PES reader on pid=ffffffff
+<   162.7090> 17:06:23.5299 [Pixmap] setPixmapNum(0) failed! defined pixmaps: []
+<   162.7114> 17:06:23.5323 [Pixmap] setPixmapNum(0) failed! defined pixmaps: []
+<   162.7469> 17:06:23.5677 [eDVBCAService] new service 1:0:1:3:1:1:D82B0C:0:0:0:
+<   162.7470> 17:06:23.5679 [eDVBCAService] add demux 0 to slot 0 service 1:0:1:3:1:1:D82B0C:0:0:0:
+<   162.7470> 17:06:23.5679 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7471> 17:06:23.5680 [eDVBSectionReader] DMX_SET_FILTER pid=0
+<   162.7475> 17:06:23.5683 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7475> 17:06:23.5684 [eDVBSectionReader] DMX_SET_FILTER pid=18
+<   162.7506> 17:06:23.5715 [Notifications] RemovePopup, id = ZapError
+<   162.7507> 17:06:23.5716 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.7508> 17:06:23.5717 [eDVBSectionReader] DMX_SET_FILTER pid=0
+<   162.7537> 17:06:23.5745 [eDVBFrontend0] update current rotorparams 1434 0015 216
+<   162.7538> 17:06:23.5746 [eDVBFrontend0] set sequence pos 4
+<   162.7538> 17:06:23.5747 [eDVBFrontend0] update current switch params
+<   162.7538> 17:06:23.5747 [eDVBFrontend0] sleep 500ms
+<   162.9017> 17:06:23.7226 [eDVBServicePMTHandler] PATready
+<   162.9018> 17:06:23.7226 [eDVBServicePMTHandler] use pmtpid 0800 for service_id 0003
+<   162.9018> 17:06:23.7226 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.9019> 17:06:23.7227 [eDVBSectionReader] DMX_SET_FILTER pid=2048
+<   162.9022> 17:06:23.7231 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.9023> 17:06:23.7232 [eDVBSectionReader] DMX_SET_FILTER pid=0
+<   162.9028> 17:06:23.7236 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.9028> 17:06:23.7236 [eDVBSectionReader] DMX_SET_FILTER pid=2048
+<   162.9030> 17:06:23.7239 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   162.9031> 17:06:23.7239 [eDVBSectionReader] DMX_SET_FILTER pid=17
+<   163.1698> 17:06:23.9906 [eDVBServicePMTHandler] sdt update done!
+<   163.2548> 17:06:24.0757 [eDVBFrontend0] set dynamic current limiting
+<   163.3132> 17:06:24.1340 [eDVBServicePlay] eventNewProgramInfo timeshift_enabled=0 timeshift_active=0
+<   163.3138> 17:06:24.1347 [eDVBServicePlay] have 1 video stream(s) (0200), and 3 audio stream(s) (1010, 1020, 1030), and the pcr pid is 0200, and the text pid is ffffffff
+<   163.3147> 17:06:24.1355 [eTSMPEGDecoder] decoder state: play, vpid=0200, apid=1010
+<   163.3147> 17:06:24.1355 [decoder][eDVBText] resetPID
+<   163.3147> 17:06:24.1356 [eDVBVideo0] VIDEO_SLOWMOTION 0 ok
+<   163.3147> 17:06:24.1356 [eDVBVideo0] VIDEO_FAST_FORWARD 0 ok
+<   163.3147> 17:06:24.1356 [eDVBVideo0] VIDEO_CONTINUE ok
+<   163.3147> 17:06:24.1356 [eDVBAudio0] AUDIO_CONTINUE ok
+<   163.3434> 17:06:24.1643 [eDVBCIInterfaces] gotPMT
+<   163.3447> 17:06:24.1655 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   163.3448> 17:06:24.1656 [eDVBSectionReader] DMX_SET_FILTER pid=2048
+<   163.3824> 17:06:24.2033 [eDVBLocalTimerHandler] dont have correction.. set Transponder Diff
+<   163.3826> 15:00:00.0000 [eDVBLocalTimerHandler] update RTC
+<   163.3827> 15:00:00.0000 [eDVBLocalTimerHandler] time update to 15:00:00
+<   163.3827> 15:00:00.0000 [eDVBLocalTimerHandler] m_time_difference is -650081184
+<   163.3827> 15:00:00.0000 [eDVBLocalTimerHandler] stepped Linux Time to 15:00:00
+<   163.3830> 15:00:00.0003 [eDVBChannel] getDemux cap=00
+<   163.5153> 17:06:24.3261 [eDVBVideo0] VIDEO_GET_EVENT GAMMA_CHANGED 0
+<   163.7587> 17:06:24.5695 [Dish] tuning failed
+<   164.0385> 17:06:24.8493 [eDVBDemux] open demux /dev/dvb/adapter0/demux0
+<   164.0386> 17:06:24.8494 [eDVBSectionReader] DMX_SET_FILTER pid=18
+<   164.7107> 17:06:25.5215 [eEPGChannelData] start reading events(1640527585)
+<   164.7108> 17:06:25.5216 [eDVBSectionReader] DMX_SET_FILTER pid=3842
+<   164.7111> 17:06:25.5219 [eDVBSectionReader] DMX_SET_FILTER pid=3003
+<   164.7113> 17:06:25.5221 [eDVBSectionReader] DMX_SET_FILTER pid=18
+<   164.7116> 17:06:25.5224 [eDVBSectionReader] DMX_SET_FILTER pid=18
+<   164.7118> 17:06:25.5226 [eDVBSectionReader] DMX_SET_FILTER pid=18
+<   164.7121> 17:06:25.5229 [eDVBSectionReader] DMX_SET_FILTER pid=700
+<   164.7122> 17:06:25.5230 [eDVBSectionReader] DMX_SET_FILTER pid=700
+<   164.7124> 17:06:25.5232 [eDVBSectionReader] DMX_SET_FILTER pid=5000
+<   164.7125> 17:06:25.5233 [eDVBSectionReader] DMX_SET_FILTER pid=5000
+<   164.7127> 17:06:25.5235 [huffman] read.. '/usr/share/enigma2/otv_00d80000_0001_0001.dict'
+<   164.7128> 17:06:25.5236 [eEPGChannelData] abort non avail OpenTV EIT reading
+<   164.7128> 17:06:25.5236 [eDVBSectionReader] DMX_SET_FILTER pid=57
+<   164.7761> 17:06:25.5870 [eInputDeviceInit] 1 160 (352) 1
+<   164.7763> 17:06:25.5870 [eRCDeviceInputDev] emit: 1
+<   164.7782> 17:06:25.5890 [InfoBarGenerics] Key: 352 (Make) KeyID='KEY_OK' Binding='('OK',)'.
+<   164.7788> 17:06:25.5896 [InfoBarGenerics] KEY: 352 OK
+<   164.7790> 17:06:25.5898 [ActionMap] Keymap 'InfobarShowHideActions' -> Action = 'toggleShow'.
+<   164.9844> 17:06:25.7952 [eInputDeviceInit] 0 160 (352) 1
+<   164.9844> 17:06:25.7952 [eRCDeviceInputDev] emit: 0
+<   164.9856> 17:06:25.7963 [InfoBarGenerics] Key: 352 (Break) KeyID='KEY_OK' Binding='('OK',)'.
+<   164.9862> 17:06:25.7970 [InfoBarGenerics] KEY: 352 OK
+<   165.5670> 17:06:26.3778 [eInputDeviceInit] 1 ae (174) 1
+<   165.5671> 17:06:26.3778 [eRCDeviceInputDev] emit: 1
+<   165.5687> 17:06:26.3795 [InfoBarGenerics] Key: 174 (Make) KeyID='KEY_EXIT' Binding='('EXIT',)'.
+<   165.5695> 17:06:26.3803 [InfoBarGenerics] KEY: 174 EXIT
+<   165.5696> 17:06:26.3804 [ActionMap] Keymap 'InfobarShowHideActions' -> Action = 'hide'.
+<   165.7753> 17:06:26.5861 [eInputDeviceInit] 0 ae (174) 1
+<   165.7754> 17:06:26.5861 [eRCDeviceInputDev] emit: 0
+<   165.7767> 17:06:26.5874 [InfoBarGenerics] Key: 174 (Break) KeyID='KEY_EXIT' Binding='('EXIT',)'.
+<   165.7773> 17:06:26.5881 [InfoBarGenerics] KEY: 174 EXIT
+<   165.9651> 17:06:26.7759 [eInputDeviceInit] 1 8b (139) 1
+<   165.9651> 17:06:26.7759 [eRCDeviceInputDev] emit: 1
+<   165.9663> 17:06:26.7771 [InfoBarGenerics] Key: 139 (Make) KeyID='KEY_MENU' Binding='('MENU',)'.
+<   165.9670> 17:06:26.7778 [InfoBarGenerics] KEY: 139 MENU
+<   165.9671> 17:06:26.7779 [ActionMap] Keymap 'InfobarMenuActions' -> Action = 'mainMenu'.
+<   165.9733> 17:06:26.7841 [Skin] Processing screen 'menu_mainmenu' from list 'menu_mainmenu, Menu', position=(30, 120), size=(560 x 850) for module 'MainMenu'.
+<   165.9910> 17:06:26.8018 [Skin] Processing screen 'MenuSummary' from list 'menu_mainmenuSummary, MenuSummary, ScreenSummary, menu_mainmenu_summary, Menu_summary, SimpleSummary', position=(0, 0), size=(1 x 1) for module 'MenuSummary'.
+<   166.1734> 17:06:26.9842 [eInputDeviceInit] 0 8b (139) 1
+<   166.1735> 17:06:26.9843 [eRCDeviceInputDev] emit: 0
+<   166.1756> 17:06:26.9864 [InfoBarGenerics] Key: 139 (Break) KeyID='KEY_MENU' Binding='('MENU',)'.
+<   166.1764> 17:06:26.9872 [InfoBarGenerics] KEY: 139 MENU
+<   166.3850> 17:06:27.1958 [eInputDeviceInit] 1 6c (108) 1
+<   166.3850> 17:06:27.1958 [eRCDeviceInputDev] emit: 1
+<   166.3862> 17:06:27.1970 [InfoBarGenerics] Key: 108 (Make) KeyID='KEY_DOWN' Binding='('DOWN',)'.
+<   166.3868> 17:06:27.1976 [InfoBarGenerics] KEY: 108 DOWN
+<   166.4858> 17:06:27.2966 [eInputDeviceInit] 0 6c (108) 1
+<   166.4858> 17:06:27.2966 [eRCDeviceInputDev] emit: 0
+<   166.4874> 17:06:27.2982 [InfoBarGenerics] Key: 108 (Break) KeyID='KEY_DOWN' Binding='('DOWN',)'.
+<   166.4881> 17:06:27.2989 [InfoBarGenerics] KEY: 108 DOWN
+<   166.8281> 17:06:27.6389 [eInputDeviceInit] 1 ae (174) 1
+<   166.8282> 17:06:27.6390 [eRCDeviceInputDev] emit: 1
+<   166.8293> 17:06:27.6401 [InfoBarGenerics] Key: 174 (Make) KeyID='KEY_EXIT' Binding='('EXIT',)'.
+<   166.8298> 17:06:27.6406 [InfoBarGenerics] KEY: 174 EXIT
+<   166.8299> 17:06:27.6407 [ActionMap] Keymap 'OkCancelActions' -> Action = 'cancel'.
+<   166.9289> 17:06:27.7397 [eInputDeviceInit] 0 ae (174) 1
+<   166.9289> 17:06:27.7397 [eRCDeviceInputDev] emit: 0
+<   166.9305> 17:06:27.7413 [InfoBarGenerics] Key: 174 (Break) KeyID='KEY_EXIT' Binding='('EXIT',)'.
+<   166.9312> 17:06:27.7420 [InfoBarGenerics] KEY: 174 EXIT
+<   169.0177> 17:06:29.8285 [eInputDeviceInit] 1 184 (388) 1
+<   169.0178> 17:06:29.8285 [eRCDeviceInputDev] emit: 1
+<   169.0191> 17:06:29.8299 [InfoBarGenerics] Key: 388 (Make) KeyID='KEY_TEXT' Binding='('TEXT',)'.
+<   169.0197> 17:06:29.8305 [InfoBarGenerics] KEY: 388 TEXT
+<   169.0199> 17:06:29.8307 [ActionMap] Keymap 'GlobalActions' -> Action = 'showRaedQuickSignal'.
+<   169.0214> 17:06:29.8322 [eServiceReference] find old format eServiceReference string
+<   169.0298> 17:06:29.8406 Traceback (most recent call last):
+<   169.0299> 17:06:29.8407   File "/usr/lib/enigma2/python/Components/ActionMap.py", line 60, in action
+<   169.0310> 17:06:29.8418     res = self.actions[action]()
+<   169.0311> 17:06:29.8419   File "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/plugin.py", line 755, in ShowHide
+<   169.0325> 17:06:29.8433     self.session.open(RaedQuickSignalScreen)
+<   169.0326> 17:06:29.8434   File "/usr/lib/enigma2/python/StartEnigma.py", line 342, in open
+<   169.0333> 17:06:29.8441     dlg = self.current_dialog = self.instantiateDialog(screen, *arguments, **kwargs)
+<   169.0333> 17:06:29.8441   File "/usr/lib/enigma2/python/StartEnigma.py", line 279, in instantiateDialog
+<   169.0349> 17:06:29.8457     return self.doInstantiateDialog(screen, arguments, kwargs, self.desktop)
+<   169.0351> 17:06:29.8458   File "/usr/lib/enigma2/python/StartEnigma.py", line 302, in doInstantiateDialog
+<   169.0359> 17:06:29.8466     dlg = screen(self, *arguments, **kwargs)
+<   169.0359> 17:06:29.8467   File "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/plugin.py", line 473, in __init__
+<   169.0368> 17:06:29.8476     self.servicelist = self.session.instantiateDialog(ChannelSelection)
+<   169.0368> 17:06:29.8476   File "/usr/lib/enigma2/python/StartEnigma.py", line 279, in instantiateDialog
+<   169.0374> 17:06:29.8482     return self.doInstantiateDialog(screen, arguments, kwargs, self.desktop)
+<   169.0374> 17:06:29.8482   File "/usr/lib/enigma2/python/StartEnigma.py", line 302, in doInstantiateDialog
+<   169.0380> 17:06:29.8488     dlg = screen(self, *arguments, **kwargs)
+<   169.0381> 17:06:29.8488   File "/usr/lib/enigma2/python/Screens/ChannelSelection.py", line 2043, in __init__
+<   169.0448> 17:06:29.8556     assert ChannelSelection.instance is None, "class InfoBar is a singleton class and just one instance of this class is allowed!"
+<   169.0450> 17:06:29.8558 AssertionError: class InfoBar is a singleton class and just one instance of this class is allowed!
+<   169.0451> 17:06:29.8559 [ePyObject] (CallObject(<bound method ActionMap.action of <Components.ActionMap.ActionMap object at 0xb0812868>>,('GlobalActions', 'showRaedQuickSignal')) failed)
+
+
+dmesg
+
+<6>usbcore: registered new interface driver uas
+<6>usbcore: registered new interface driver usb-storage
+<6>mousedev: PS/2 mouse device common for all mice
+<6>i2c /dev entries driver
+<6>IR NEC protocol handler initialized
+<6>IR RC5(x/sz) protocol handler initialized
+<6>IR RC6 protocol handler initialized
+<6>IR JVC protocol handler initialized
+<6>IR Sony protocol handler initialized
+<6>IR SANYO protocol handler initialized
+<6>IR Sharp protocol handler initialized
+<6>IR MCE Keyboard/mouse protocol handler initialized
+<6>IR XMP protocol handler initialized
+<6>sp805-wdt f8a2c000.watchdog: registration successful
+<4>registered new interface driver himciV2.0_4.4.35_20170401
+<6>usb 1-1: new high-speed USB device number 2 using ehci-platform
+<6>hub 1-1:1.0: USB hub found
+<6>hub 1-1:1.0: 4 ports detected
+<6>mmc0: MAN_BKOPS_EN bit is not set
+<6>mmc0: new DDR MMC card at address 0001
+<6>mmcblk0: mmc0:0001 8GTF4R 7.28 GiB 
+<6>mmcblk0boot0: mmc0:0001 8GTF4R partition 1 4.00 MiB
+<6>mmcblk0boot1: mmc0:0001 8GTF4R partition 2 4.00 MiB
+<6>mmcblk0rpmb: mmc0:0001 8GTF4R partition 3 512 KiB
+<6> mmcblk0: p1(boot) p2(bootargs) p3(bootoptions) p4(baseparam) p5(pqparam) p6(logo) p7(deviceinfo) p8(softwareinfo) p9(loaderdb) p10(loader) p11(trustedcore) p12(linuxkernel1) p13(linuxkernel2) p14(linuxkernel3) p15(linuxkernel4) p16(userdata)
+<6>usb 1-2: new high-speed USB device number 3 using ehci-platform
+<5>f9820000.himciv200.SD: eMMC/MMC/SD Device NOT detected!
+<6>usb 1-1.3: new high-speed USB device number 4 using ehci-platform
+<6>usb-storage 1-1.3:1.0: USB Mass Storage device detected
+<6>scsi host0: usb-storage 1-1.3:1.0
+<5>f9c40000.himciv200.SD: eMMC/MMC/SD Device NOT detected!
+<6>usbcore: registered new interface driver usbhid
+<6>usbhid: USB HID core driver
+<6>ashmem: initialized
+<6>usbcore: registered new interface driver snd-usb-audio
+<6>oprofile: using timer interrupt.
+<6>Initializing XFRM netlink socket
+<6>NET: Registered protocol family 10
+<6>NET: Registered protocol family 17
+<5>Key type dns_resolver registered
+<5>Registering SWP/SWPB emulation handler
+<6>Bluetooth: Starting self testing
+<6>Bluetooth: ECDH test passed in 21538 usecs
+<6>Bluetooth: SMP test passed in 78 usecs
+<6>Bluetooth: Finished self testing
+<6>ALSA device list:
+<6>  No soundcards found.
+<6>Freeing unused kernel memory: 560K (c0afe000 - c0b8a000)
+<4>This architecture does not have kernel memory protection.
+<6>EXT4-fs (mmcblk0p16): mounted filesystem with ordered data mode. Opts: (null)
+<4>Load hi_media.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:28:35])
+<4>Load hi_mmz.ko success.		(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:28:35])
+<4>virtual device initialization.
+<4>Load hi_common.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Jun 26 2018, 14:24:58])
+<4>Load hi_pq.ko success.		(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:28])
+<4>Load hi_cipher.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:30:22])
+<4>Load hi_hdmi.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Mar 30 2019, 15:16:17])
+<4>hisi hdmi CEC Driver, (c) 2018 Define Technologies
+<4>Load hi_vou.ko success.     	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Jun 28 2018, 16:48:45])
+<4>Load hi_gpio.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:30:40])
+<4>Load hi_gpioi2c.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:14])
+<4>Load hi_i2c.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:15])
+<4>Load hi_tde.ko success.		(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:41])
+<4>Load hi_otp.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:23])
+<4>Load hi_demux.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Jul 26 2018, 18:25:22])
+<4>Load hi_adec.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:29:59])
+<4>Load hi_vfmw.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:53])
+<5>scsi 0:0:0:0: Direct-Access     Generic  STORAGE DEVICE   1404 PQ: 0 ANSI: 6
+<4>print parent bus[usb], bus_id[1-1.3:1.0]
+<5>sd 0:0:0:0: Attached scsi generic sg0 type 0
+<4>Load hi_vpss.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:32:27])
+<4>Load hi_vdec.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:44])
+<4>Load hi_adsp.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:30:00])
+<6>hisi-sndcard hisi-sndcard: aiao-hifi <-> hisi-i2s mapping ok
+<4>Load hi_aiao.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Jul 14 2018, 10:00:23])
+<5>sd 0:0:0:0: [sda] 62333952 512-byte logical blocks: (31.9 GB/29.7 GiB)
+<5>sd 0:0:0:0: [sda] Write Protect is off
+<7>sd 0:0:0:0: [sda] Mode Sense: 21 00 00 00
+<5>sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+<4>Alternate GPT is invalid, using primary GPT.
+<6> sda: sda1 sda2 sda3 sda4 sda5 sda6 sda7 sda8 sda9 sda10 sda11 sda12 sda13
+<5>sd 0:0:0:0: [sda] Attached SCSI removable disk
+<4>Load hi_pvr.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:38])
+<4>Load hi_tuner.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:30:30])
+<4>Load hi_keyled.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Mar 27 2019, 19:29:24])
+<6>virtual DVB adapter driver, version 1.4, (c) 2010-12 Honza Petrous, SmartImp.cz
+<5>vtunerc: registered /dev/misc/vtuner0
+<5>vtunerc: registered /dev/misc/vtuner1
+<5>vtunerc: registered /dev/misc/vtuner2
+<4>hi_dvb: unknown parameter 'hi_vendor' ignored
+<4>hi_dvb: unknown parameter 'hi_device' ignored
+<6>phi
+<6>HI PCIE bridge driver, Copyright (C) 2005-2018 Micronas
+<6>DVB: registering new adapter (nHi)
+<5>random: nonblocking pool is initialized
+<4>si2166 attach success
+<6>DVB: registering adapter 0 frontend 0 (Si2166D)...
+<6>[hi_dvb_attach_tsport:740 dmx 0,port 32]0 5 1 0 184
+<4>u32DmxNum : 5 u32FilterNum : 64 u32ChannelNum : 96 u32RamPortNum : 3
+<4>si2166 attach success
+<6>DVB: registering adapter 0 frontend 0 (Si2166D)...
+<6>[hi_dvb_attach_tsport:740 dmx 1,port 33]0 5 1 0 184
+<4>u32DmxNum : 5 u32FilterNum : 64 u32ChannelNum : 96 u32RamPortNum : 3
+<4>atbm781x2x3x_attach I2C(1) , ADDR: 128(0x80)
+<4>[19:27:52:881 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:52:903 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<4>atbm781x2x3x_attach I2C(2) , ADDR: 128(0x80)
+<4>[19:27:53:135 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(2) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:53:157 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(2) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<4>atbm781x2x3x_attach I2C(1) , ADDR: 152(0x98)
+<4>[19:27:53:389 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:53:411 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[matbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<6>[hi_dvb_attach_tsport:740 dmx 2,port 34]0 5 1 0 184
+<4>u32DmxNum : 5 u32FilterNum : 64 u32ChannelNum : 96 u32RamPortNum : 3
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<4>atbm781x2x3x_attach I2C(1) , ADDR: 128(0x80)
+<4>[19:27:53:665 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:53:688 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<4>atbm781x2x3x_attach I2C(2) , ADDR: 128(0x80)
+<4>[19:27:53:920 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(2) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:53:942 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(2) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<4>atbm781x2x3x_attach I2C(1) , ADDR: 152(0x98)
+<4>[19:27:54:174 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:54:196 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<6>[hi_dvb_attach_tsport:740 dmx 3,port 35]0 5 1 0 184
+<4>u32DmxNum : 5 u32FilterNum : 64 u32ChannelNum : 96 u32RamPortNum : 3
+<4>atbm781x2x3x_attach I2C(1) , ADDR: 128(0x80)
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m[19:27:54:444 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:54:470 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<4>atbm781x2x3x_attach I2C(2) , ADDR: 128(0x80)
+<4>[19:27:54:702 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(2) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:54:724 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(2) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<4>atbm781x2x3x_attach I2C(1) , ADDR: 152(0x98)
+<4>[19:27:54:956 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>[19:27:54:978 ERROR-HI_I2C]:I2C_DRV_Read[260]:i2c_transfer failed:-6
+<4>atbm781x2x3x I2C(1) read error, ADDR: 0(0x0000), DATA: 0(0x00)
+<4>atbm781x2x3x attach fail!
+<3>phi: No HI Demod Found!
+<4>No this tuner device
+<4>u32DmxNum : 5 u32FilterNum : 64 u32ChannelNum : 96 u32RamPortNum : 3
+<4>Load hi_fb.ko success.		(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Nov 17 2020, 17:37:22])
+<4>Mali: Mali device driver loaded
+<6>misc hi_dbe: hi_dbe ready
+<4>Load hi_jpegdec.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:17])
+<4>Load hi_jpegenc.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:17])
+<4>Load hi_png.ko success.		(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:26])
+<4>Load hi_advca.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:30:01])
+<4>Load hi_venc.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:48])
+<4>Load hi_aenc.ko success.  	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:30:04])
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<4>Load hi_sci.ko success.   	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Mar 27 2019, 19:29:44])
+<4>Load hi_vi.ko success.		(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [May 16 2018, 18:31:55])
+<4>Load hi_pmoc.ko success.	(SDK_VERSION: [HiSTBLinuxV100R005C00SPC052_20180124] Build Time: [Sep  6 2019, 10:59:26])
+<6>Registered IR keymap rc-hi3798
+<6>input: dreambox advanced remote control as /devices/virtual/rc/rc0/input0
+<6>rc0: dreambox advanced remote control as /devices/virtual/rc/rc0
+<4>hisi KEYS Driver, (c) 2017 Define Technologies
+<6>input: Hisi Front Panel Button Controls as /devices/platform/hisi_keys/input/input1
+<4>hisi encoder Driver, (c) 2017 Define Technologies
+<4>FAT-fs (sda13): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<4>tntfs: module license 'Commercial. For support email ntfs-support@tuxera.com.' taints kernel.
+<4>Disabling lock debugging due to kernel taint
+<6>Tuxera NTFS driver 3017.7.4.6 [Flags: R/W MODULE].
+<6>Built against headers 4.4.35_hi3798mv2x #1 SMP Tue Dec 12 14:16:24 CST 2017 arm
+<6>Running on kernel 4.4.35 #1 SMP Wed Dec 15 17:55:01 UTC 2021 armv7l
+<2>WARNING: Running kernel does not match configured kernel headers the driver was built with!  The driver needs to be rebuilt with the correct kernel headers!
+<6>SGI XFS with ACLs, security attributes, realtime, no debug enabled
+<6>model=sf8008
+<6>displaymodel=SF8008 4K UHD
+<6>brand=octagon
+<6>displaybrand=Octagon
+<6>platform=N/A
+<6>imgversion=5.0
+<6>imgrevision=006
+<6>imglanguage=N/A
+<6>developername=openbh
+<6>feedsurl=http://feeds.openbh.net/5.0/sf8008
+<6>distro=openbh
+<6>oe=OE-Alliance 5.0
+<6>kernel=4.4.35
+<6>python=3.9
+<6>mediaservice=N/A
+<6>multilib=False
+<6>architecture=cortexa15hf-neon-vfpv4
+<6>socfamily=hisi3798mv200
+<6>blindscanbinary=N/A
+<6>rctype=0
+<6>rcname=sf8008
+<6>rcidnum=2
+<6>smallflash=False
+<6>middleflash=False
+<6>imagedir=octagon/sf8008
+<6>imagefs= octagonemmc
+<6>mtdbootfs=
+<6>mtdrootfs=mmcblk0p16
+<6>mtdkernel=mmcblk0p12
+<6>rootfile=rootfs.tar.bz2
+<6>kernelfile=kernel.bin
+<6>mkubifs=
+<6>ubinize=
+<6>forcemode=N/A
+<6>compiledate=20211226
+<6>fpu=hard
+<6>displaytype=7segment
+<6>transcoding=False
+<6>multitranscoding=True
+<6>hdmi=True
+<6>yuv=False
+<6>rca=False
+<6>avjack=True
+<6>scart=False
+<6>dvi=False
+<6>svideo=False
+<6>hdmihdin=False
+<6>hdmifhdin=False
+<6>wol=False
+<6>wwol=False
+<6>ci=False
+<6>vfdsymbol=False
+<6>fhdskin=True
+<6>dboxlcd=N/A
+<6>imageversion=5.0
+<6>imagebuild=006
+<6>imagedevbuild=000
+<6>imagetype=release
+<6>EXT4-fs (mmcblk0p16): re-mounted. Opts: data=ordered
+<6>usbcore: registered new interface driver rtl8192eu
+<4>FAT-fs (mmcblk0p3): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+<4>[19:27:59:504 ERROR-HI_PM]:c51_GetWakeUpMode[1297]: wakeup mode err! 
+<4>proc_vmpeg_0_dst_apply_write 1
+<6>[iframe_confirm:190] iframe confirm
+<6>
+<4>video[0] ready to play
+<6>[iframe_finish:208] iframe finish
+<6>
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<6>IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+<6>hi_gmac_v200 f9840000.ethernet eth0: Link is Up - 1Gbps/Full - flow control off
+<6>IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+<6>[iframe_confirm:190] iframe confirm
+<6>
+<4>video[0] ready to play
+<6>[iframe_finish:208] iframe finish
+<6>
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<4>[23:21:53:317 ERROR-HI_VPSS]:HI_DRV_VPSS_RelPortFrame[520]:Port = 0 RelPortFrame 0 Failed
+<4>OPS_si2166_init
+<4>@RDA5815M_Initialize
+<4>api->spi_download 0
+<4>Build Option: Si2183_B60_COMPATIBLE
+<4>Si2166-D60 Part running 'FW_6_1b4'
+<4>@si2166_i2c_gate_ctrl
+<4>@si2166_i2c_gate_ctrl
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>OPS_si2166_init
+<4>@RDA5815M_Initialize
+<4>api->spi_download 0
+<4>Build Option: Si2183_B60_COMPATIBLE
+<4>Si2166-D60 Part running 'FW_6_1b4'
+<4>@si2166_i2c_gate_ctrl
+<4>@si2166_i2c_gate_ctrl
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>proc_vmpeg_0_dst_apply_write 00000001
+<4>
+<4>UDF-fs: warning (device mmcblk0p1): udf_fill_super: No partition found (2)
+<4>UDF-fs: warning (device mmcblk0p1): udf_fill_super: No partition found (2)
+<6>yaffs: dev is 187695105 name is "mmcblk0p1" rw
+<6>yaffs: passed flags ""
+<7>yaffs: yaffs: Attempting MTD mount of 179.1,"mmcblk0p1"
+<7>yaffs: yaffs: MTD device 1 either not valid or unavailable
+<6>yaffs: dev is 187695105 name is "mmcblk0p1" rw
+<6>yaffs: passed flags ""
+<7>yaffs: yaffs: Attempting MTD mount of 179.1,"mmcblk0p1"
+<7>yaffs: yaffs: MTD device 1 either not valid or unavailable
+<6>tntfs info (device mmcblk0p1, pid 2495): ntfs_fill_super(): fail_safe is enabled.
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>bestfit
+<4>proc_video_videomode_50hz_write [1080p50]
+<4>proc_video_videomode_60hz_write [1080p50]
+<4>proc_video_videomode_24hz_write [1080p50]
+<4>wol offstStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>@si2166_i2c_gate_ctrl
+<4>@si2166_i2c_gate_ctrl
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>hi_dvb_set_source [dmx: 0, tuner: 0, isvtuner: 0]
+<6>[hi_dvb_attach_tsport:740 dmx 0,port 32]0 5 1 0 184
+<4>@si2166_diseqc_set_voltage 13V(VERTICAL)
+<4>send discq: E0 31 6B 15 A4 AB, len:4
+<4>@si2166_diseqc_set_voltage 18V(HORIZONTAL)
+<4>si2166_set_frontend [frequency:1270000,symbol_rate:7500000,is_id:255,pls_code:262143,pls_mode:3,isdbt_sb_segment_idx:0x00000000]
+<4>si2166_set_frontend [stream_id:0xffffffff]
+<4>fPLL_MHz 0, LPF_KHz 8000
+<4>Filter_bw_control_bit = 9
+<4>************************************KLOOP:18*******************************
+<4>fPLL_MHz 1270, LPF_KHz 8000
+<4>Filter_bw_control_bit = 9
+<4>si2166_set_frontend end at 1270000 took 106 ms
+<4>DmxPcrAcquire 0 -1073332964
+<4>Enter DMX_OsiPcrChannelAttachSync 0 0 4325376
+<4>audio[0] ready to play
+<4>Enter DMX_OsiPcrChannelDetachSync 0 0
+<4>DmxPcrAcquire 0 -1073058104
+<4>Enter DMX_OsiPcrChannelAttachSync 0 0 4325376
+<4>video[0] ready to play
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<4>[23:22:17:564 ERROR-HI_VPSS]:HI_DRV_VPSS_RelPortFrame[520]:Port = 0 RelPortFrame 0 Failed
+<6>[1;32mdvb video add event 1 - 0 0 1920 1080
+<6>[m
+<6>[1;32mdvb video add event 2 - 0 0 25 0
+<6>[mbestfit
+<4>proc_vmpeg_0_dst_apply_write 00000001
+<4>
+<4>proc_vmpeg_0_dst_apply_write 00000001
+<4>
+<4>[23:23:38:732 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:763 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:792 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:823 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:852 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:882 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:913 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:942 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:38:972 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:003 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:032 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:062 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:092 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:123 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:152 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:182 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:213 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:243 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:272 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:302 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:332 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:362 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:392 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:422 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:452 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:482 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:512 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:543 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:572 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:602 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:632 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:663 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:692 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:722 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:752 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:782 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:812 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:842 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:872 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:902 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:933 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:963 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:39:992 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:40:022 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>[23:23:40:052 ERROR-HI_SYNC]:SYNC_PcrProc[3582]:invalid sync
+<4>>>> in...
+<4>[23:23:43:895 ERROR-HI_PM]:c51_GetWakeUpMode[1297]: wakeup mode err! 
+<6>[iframe_confirm:190] iframe confirm
+<6>
+<6>[iframe_finish:208] iframe finish
+<6>
+<4>video[0] ready to play
+<4>proc_vmpeg_0_dst_apply_write 1
+<4>@si2166_i2c_gate_ctrl
+<4>@si2166_i2c_gate_ctrl
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>@si2166_i2c_gate_ctrl
+<4>@si2166_i2c_gate_ctrl
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<4>@si2166_diseqc_set_voltage OFF
+<4>proc_vmpeg_0_dst_apply_write 00000001
+<4>
+<4>UDF-fs: warning (device mmcblk0p1): udf_fill_super: No partition found (2)
+<4>UDF-fs: warning (device mmcblk0p1): udf_fill_super: No partition found (2)
+<6>yaffs: dev is 187695105 name is "mmcblk0p1" rw
+<6>yaffs: passed flags ""
+<7>yaffs: yaffs: Attempting MTD mount of 179.1,"mmcblk0p1"
+<7>yaffs: yaffs: MTD device 1 either not valid or unavailable
+<6>yaffs: dev is 187695105 name is "mmcblk0p1" rw
+<6>yaffs: passed flags ""
+<7>yaffs: yaffs: Attempting MTD mount of 179.1,"mmcblk0p1"
+<7>yaffs: yaffs: MTD device 1 either not valid or unavailable
+<6>tntfs info (device mmcblk0p1, pid 2837): ntfs_fill_super(): fail_safe is enabled.
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>bestfit
+<4>proc_video_videomode_50hz_write [1080p50]
+<4>proc_video_videomode_60hz_write [1080p50]
+<4>proc_video_videomode_24hz_write [1080p50]
+<4>wol offstStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>stStdTiming[h:640, v:480]
+<4>stStdTiming[h:800, v:600]
+<4>stStdTiming[h:1024, v:768]
+<4>stStdTiming[h:1152, v:864]
+<4>stStdTiming[h:1280, v:1024]
+<4>@si2166_i2c_gate_ctrl
+<4>@si2166_i2c_gate_ctrl
+<4>@OPS diseqc tone = 0(22K-OFF)
+<4>@si2166_diseqc_set_voltage OFF
+<4>hi_dvb_set_source [dmx: 0, tuner: 0, isvtuner: 0]
+<6>[hi_dvb_attach_tsport:740 dmx 0,port 32]0 5 1 0 184
+<4>@si2166_diseqc_set_voltage 13V(VERTICAL)
+<4>send discq: E0 31 6B 15 AC AF, len:4
+<4>@si2166_diseqc_set_voltage 18V(HORIZONTAL)
+<4>si2166_set_frontend [frequency:1270000,symbol_rate:7500000,is_id:255,pls_code:262143,pls_mode:3,isdbt_sb_segment_idx:0x00000000]
+<4>si2166_set_frontend [stream_id:0xffffffff]
+<4>fPLL_MHz 0, LPF_KHz 8000
+<4>Filter_bw_control_bit = 9
+<4>fPLL_MHz 1270, LPF_KHz 8000
+<4>Filter_bw_control_bit = 9
+<4>si2166_set_frontend end at 1270000 took 105 ms
+<4>DmxPcrAcquire 0 -1073058104
+<4>Enter DMX_OsiPcrChannelAttachSync 0 0 4325376
+<4>audio[0] ready to play
+<4>Enter DMX_OsiPcrChannelDetachSync 0 0
+<4>DmxPcrAcquire 0 -1073058104
+<4>Enter DMX_OsiPcrChannelAttachSync 0 0 4325376
+<4>video[0] ready to play
+<4>[1;32mdvb video add event 17 - 7 0
+<4>[m
+<4>[23:24:04:948 ERROR-HI_VPSS]:HI_DRV_VPSS_RelPortFrame[520]:Port = 0 RelPortFrame 0 Failed
+
