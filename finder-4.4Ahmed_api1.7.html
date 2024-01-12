@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Finder v4.3</title>
+    <style>
+        .body {
+            max-height: 1280px;
+            max-width: 720px;
+        }
+
+        #debug {
+            font-family: Arial;
+            margin: 10px 10px 10px 10px;
+            width: 300px;
+            padding: 20px 20px 20px 20px;
+            display: none;
+        }
+
+        #stb_mode {
+            background-color: #E0E0E0;
+        }
+
+        #my_tpselect {
+            position: absolute;
+            right: 5px;
+        }
+
+        #my_select {
+            margin-left: 5px;
+        }
+
+        #my_select,
+        #my_tpselect {
+            font-size: 1.15em;
+            color: #606060;
+            background-color: #E0E0E0;
+            border: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        #my_channel_list_select {
+            font-size: 1.00em;
+            color: #5050C0;
+            background-color: #E0E0E0;
+            border: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        #finder {
+            position: absolute;
+            width: 430px;
+            height: 720px;
+            margin: 0px 10px 10px 250px;
+            font-family: Arial;
+            font-size: 1.25em;
+            display: none;
+        }
+
+        #dish_move {
+            margin: 10px 0px 0px 0px;
+        }
+
+        #skew {
+            margin: 10px 0px 0px 45px;
+        }
+
+        #elevation {
+            margin: -10px 0px 0px 35px;
+        }
+
+        #skew-ok,
+        #elevation-ok {
+            position: absolute;
+            font-family: Tahoma;
+            color: #32CD32;
+            margin: -158px 0px 0px 280px;
+        }
+
+        #elevation-ok {
+            margin: -178px 0px 0px 273px;
+        }
+
+        #snr_spectrum {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            padding: 20px 10px 20px 10px;
+        }
+
+        #lock_status {
+            width: 300px;
+            text-align: left;
+            border: 0px;
+            margin: 0px 0px 0px 25px;
+        }
+
+        #lock_figure_area {
+            position: absolute;
+            margin: 0px;
+            padding: 0px;
+            width: 40px;
+            height: 22px;
+        }
+
+        #snr_db {
+            position: absolute;
+            right: 10px;
+            font-size: 5em;
+            margin: -100px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
+        }
+
+        #snr_db_2 {
+            position: absolute;
+            right: 10px;
+            font-size: 2em;
+            margin: 60px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;          
+        }
+
+        #snr_lm_bar {
+            width: 400px;
+            height: 48px;
+            position: absolute;
+            background: #F0F8FF;
+        }
+
+        #snr_bar {
+            width: 400px;
+            height: 48px;
+            position: absolute;
+        }
+
+        #lm_bar {
+            width: 400px;
+            height: 48px;
+            position: absolute;
+        }
+
+        #lpg_db_line {
+            position: absolute;
+            margin: 360px 0px 0px -270px;
+            padding: 5px 5px 5px 5px;
+        }
+
+        #ip {
+            width: 220px;
+            font-weight: bold;
+            font-size: 1.8em;
+        }
+
+        .ip {
+            font-family: Arial;
+        }
+
+        #status {
+            color: orangered;
+        }
+
+        #ver,
+        #hw_id,
+        #box_name {
+            color: darkcyan;
+        }
+
+        #ver,
+        #hw_id,
+        #box_name,
+        #status {
+            font-weight: bold;
+        }
+		
+		/*
+		* LNB Skew Logo
+		*/
+		svg#lnb {
+			/* transition: all 500ms ease !important; */
+			transition: all 500ms cubic-bezier(0, 0, 0, 0) !important;
+		}
+
+		/*
+		* LNB Skew Bar
+		*/
+		rect#skew-bar {
+			/*transition: all 500ms ease;*/
+			transition: all 250ms cubic-bezier(0, 0, 0, 0);
+		}
+		
+		/*
+		* Elevation Dish
+		*/
+		svg#dish {
+			/*transition: all 500ms ease;*/
+			transition: all 400ms cubic-bezier(0, 0, 0, 0);
+		}
+		
+		/*
+		* Elevation Bar
+		*/
+		rect#elevation-bar {
+			/*transition: all 500ms ease;*/
+			transition: all 400ms cubic-bezier(0, 0, 0, 0);
+		}
+
+    </style>
+</head>
+
+<body>
+    <div id="finder">
+        <small id="latency">~</small>
+        <div id="stb_mode">
+            <select id="my_select" name="my_select" onChange="satListSelected()"> </select>
+            <select id="my_tpselect" right="0" name="my_tpselect" onChange="tpListSelected()"> </select>
+            <select id="my_channel_list_select" right="0" name="my_channel_list_select"> </select>
+            <form type="post" onsubmit="return c_ahmed(event)">
+                <input type="number" id="c_frequency" name="c_frequency">
+                <select name="c_type" id="c_type">
+                    <option value="0">H</option>
+                    <option value="1">V</option>
+                </select>
+                <input type="number" id="c_sr" name="c_sr">
+                <input type="submit" value="Lock">
+            </form>
+        </div>
+        <div id="lnb_skew">
+            <svg id="lnb" width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="75" cy="75" r="74" fill="#C0C0C0" stroke="black" stroke-width="2" />
+                <circle cx="74.5" cy="74.5" r="47.5" fill="#909090" stroke="black" stroke-width="2" />
+                <line x1="121" y1="86" x2="28" y2="86" stroke="black" stroke-width="2" />
+                <rect x="63" y="86" width="23" height="29" fill="#707070" stroke="black" stroke-width="2" />
+                <path d="M75.5001 27C108.5 27 128 60 120.5 86H75.5001H28.5C21.5 60.5 39.5004 27 75.5001 27Z" fill="#A0A0A0" stroke="black" stroke-width="2" />
+                <path d="M73.344 9L75 3.4801L76.656 9H75H73.344Z" fill="black" stroke="black" stroke-width="2" />
+                <line x1="68.9962" y1="1.91284" x2="69.3448" y2="5.89762" stroke="black" stroke-width="2" />
+                <line x1="81.3448" y1="1.08716" x2="80.9962" y2="5.07193" stroke="black" stroke-width="2" />
+                <line x1="62.9848" y1="2.82635" x2="63.6794" y2="6.76558" stroke="black" stroke-width="2" />
+                <line x1="87.6754" y1="2.17264" x2="86.9848" y2="6.11258" stroke="black" stroke-width="2" />
+                <line x1="55.9659" y1="2.74118" x2="58.0365" y2="10.4686" stroke="black" stroke-width="2" />
+                <line x1="94.0098" y1="3.27083" x2="91.9369" y2="10.9976" stroke="black" stroke-width="2" />
+                <line x1="49.9397" y1="5.65798" x2="51.3078" y2="9.41675" stroke="black" stroke-width="2" />
+                <line x1="43.9063" y1="8.57738" x2="45.5968" y2="12.2026" stroke="black" stroke-width="2" />
+                <line x1="99.3012" y1="5.34025" x2="97.9402" y2="9.10159" stroke="black" stroke-width="2" />
+                <line x1="105.591" y1="7.42092" x2="103.907" y2="11.0493" stroke="black" stroke-width="2" />
+                <line x1="38.866" y1="10.5" x2="42.866" y2="17.4282" stroke="black" stroke-width="2" />
+                <line x1="111.663" y1="10.553" x2="107.663" y2="17.4812" stroke="black" stroke-width="2" />
+                <line x1="33.8192" y1="14.4264" x2="36.1135" y2="17.703" stroke="black" stroke-width="2" />
+                <line x1="28.766" y1="18.3572" x2="31.3372" y2="21.4214" stroke="black" stroke-width="2" />
+                <line x1="22.7071" y1="21.2929" x2="28.364" y2="26.9497" stroke="black" stroke-width="2" />
+                <line x1="117.114" y1="14.5736" x2="114.819" y2="17.8502" stroke="black" stroke-width="2" />
+                <line x1="121.753" y1="18.4467" x2="119.182" y2="21.5109" stroke="black" stroke-width="2" />
+                <line x1="126.958" y1="21.9559" x2="121.301" y2="27.6127" stroke="black" stroke-width="2" />
+                <line x1="62.9134" y1="105.004" x2="85.9134" y2="103.004" stroke="black" stroke-width="2" />
+                <line x1="62.9134" y1="101.004" x2="85.9134" y2="99.0038" stroke="black" stroke-width="2" />
+                <line x1="62.917" y1="97.0035" x2="86.917" y2="95.0035" stroke="black" stroke-width="2" />
+                <line x1="63.9095" y1="109.004" x2="85.9095" y2="107.004" stroke="black" stroke-width="2" />
+                <line x1="62.9095" y1="113.004" x2="84.9095" y2="111.004" stroke="black" stroke-width="2" /> </svg>
+            <!-- lnb skew bar -->
+            <svg id="skew" width="202" height="157" viewBox="0 0 202 157" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="84.5" width="201" height="49" fill="#F8F8F8" stroke="black" />
+                <rect id="skew-bar" x="55" y="85" width="0" height="48" fill="#FF0038" />
+                <line x1="101" y1="162" x2="101" y2="66" stroke="black" stroke-width="4" />
+                <path id="arrow-s" d="M65 32V14H101V0L142 23L101 46V32H65Z" fill="#FF0038" /> </svg>
+            <h2 id="skew-ok"></h2></div>
+        <!-- dish elevation setup -->
+        <div id="dish_move">
+            <svg id="dish" width="231" height="280" viewBox="0 0 231 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M62 4.00012C26.9787 63.3105 3 190 60.4998 259.5L62 4.00012Z" fill="#C4C4C4" stroke="black" stroke-width="2" />
+                <path d="M227.198 184H181.5V167H216.399H221.799C228.548 170.643 233.272 182.179 227.198 184Z" fill="#C4C4C4" stroke="black" stroke-width="2" />
+                <path d="M188.852 165.662C188.852 157.803 211 157.847 211 165.706V205C211 212.859 188.853 212.815 188.852 204.956L132.176 238.728L75.5001 272.5C64.3577 278.073 54.4547 282.5 49.0001 272.5C9.99951 201 0.999645 193.5 1 178.5L1.00006 175.85C1.00065 151.042 1.00073 147.555 1 137C0.999548 130.5 4.46163 129 27 121.5V147V167C28.5 184 31 196 35.5 211.5C40 227 53 250.5 61 261H63.5L188.852 192V165.662Z" fill="#808080" />
+                <path d="M188.852 204.956C188.853 212.815 211 212.859 211 205V165.706C211 157.847 188.852 157.803 188.852 165.662V192M188.852 204.956L132.176 238.728L75.5001 272.5C64.3577 278.073 54.4547 282.5 49.0001 272.5C9.99951 201 0.999645 193.5 1 178.5C1.00064 151.274 1.00076 147.92 1 137C0.999548 130.5 4.46163 129 27 121.5V147V167C28.5 184 31 196 35.5 211.5C40 227 53 250.5 61 261H63.5L188.852 192M188.852 204.956V192" stroke="black" stroke-width="2" />
+                <path d="M166 174.507C166 154.857 165.999 156.013 170.594 156.013L181.5 167V184L170.594 193C166 193 166 193 166 174.507Z" fill="#C4C4C4" />
+                <path d="M217.683 193V184H224V193H217.683Z" fill="#C4C4C4" />
+                <path d="M181.5 167L170.594 156.013C165.999 156.013 166 154.857 166 174.507C166 193 166 193 170.594 193L181.5 184M181.5 167H189M181.5 167V184M189 184H181.5M217.683 184V193H224V184H217.683Z" stroke="black" stroke-width="2" />
+                <path d="M170.5 156L181.5 167M170.5 193L181.5 184" stroke="black" stroke-width="2" />
+                <path d="M6 153.5C6 143.5 21 143.5 21 153.5C21 163.5 6 163.5 6 153.5Z" fill="#808080" stroke="black" stroke-width="2" />
+                <path d="M72.7601 130.219C72.7601 -1.24988 71 5.50012 64.2396 1H61.6958L60 261H62.5437C70 257.5 72.7601 266.13 72.7601 130.219Z" fill="#C4C4C4" stroke="black" stroke-width="2" /> </svg>
+            <!-- elevation bar -->
+            <svg id="elevation" width="156" height="302" viewBox="0 0 156 302" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="83.5" y="0.5" width="49" height="301" fill="#F8F8F8" stroke="black" />
+                <rect id="elevation-bar" x="84" y="151" width="48" height="0" fill="#FF0038" />
+                <line x1="60" y1="150" x2="156" y2="150" stroke="black" stroke-width="4" />
+                <path id="arrow-e" d="M33 150V186.5H15V149.5H0L23.5 109L47 150H33Z" fill="#FF0038" /> </svg>
+            <h2 id="elevation-ok"></h2> </div>
+        <!-- signal measures -->
+        <div id="snr_spectrum">
+            <button id="sp_lck_btn" onclick="changeFindModeFunction()">Spectrum</button>
+            <button id="create_report_btn" onclick="onCreateReportFunction()">Diagnostic</button>
+            <button id="blindscan_btn" onclick="onBlindScanFunction()">Blind Scan</button>
+            <button id="channels_scan_btn" onclick="onChannelsScanFunction()">Auto Scan</button>
+            <button id="settings_btn" onclick="onUpdateSettingsFunction()">Import Settings</button>
+            <button id="card_info_btn" onclick="onGetCardInfoFunction()">Card Info</button>
+            <!--    <canvas id="lpg_db_line" width=600 height=200 style="border:3px solid grey"></canvas> -->
+            <canvas id="spectrum" width=400 height=320 style="border:3px solid grey"></canvas>
+            <div id="signal">
+                <svg id="lock_figure_area">
+                    <circle id="lock_figure" cx="10" cy="12" r="8" fill="#FF0038" /> </svg>
+                <h3 id="lock_status">Carrier offset, MHz:
+
+            </h3>
+                <h3>LM, dB:
+                <a id="lm_db"></a>
+            </h3>
+                <h3>C/N,  dB<h1 id="snr_db" align="right"></h1></h3>
+                <div id="snr_lm_bar">
+                    <div id="snr_bar"></div>
+                    <div id="lm_bar"></div>
+                </div>
+                <h3 id="snr_db_2" align="right"></h3>
+            </div>
+        </div>
+    </div>
+    <div class="ip">STB IP:
+        <br>
+        <input type="text" id="ip" onchange="getIPFunction()">
+        <p id="status">Not Connected<span id="ret"></span></p>
+        <p id="ver"></p>
+        <p id="hw_id"></p>
+        <p id="box_name"></p>
+    </div>
+    <div id="debug">
+        <div id="Alfa">
+            <h3>Alfa,  degree: </h3>
+            <h1 id="alfa_degree"></h1> </div>
+        <div id="Beta">
+            <h3>Beta,  degree:</h3>
+            <h1 id="beta_degree"></h1> </div>
+        <div id="Gamma">
+            <h3>Gamma,  degree:</h3>
+            <h1 id="gamma_degree"></h1> </div>
+        <div id="FPS">
+            <h3>FPS, f/s:</h3>
+            <h1 id="fps"></h1> </div>
+        <div id="snr_only">
+            <h1 id="lock-stage"></h1>
+            <h1 id="Lock"></h1> </div>
+        <div id="spectrum_only">
+            <div id="cnr_value"> </div>
+        </div>
+    </div>
+    <script>
+        //=====================================================================================
+        let callibration_array = [6.7, 6.4, 6.2, 5.6, 5.4, 5.2, 5.1, 4.9, 4.4, 4.4, 4.0, 3.9, 3.8, 3.5, 3.4, 3.4, 3.2, 3.0, 3.0, 2.7, 2.7, 2.6, 2.4, 2.5, 2.2, 2.2, 2.1, 2.0, 2.0, 1.9, 2.0, 1.9, 1.7, 1.7, 1.6, 1.6, 1.7, 1.7, 1.7, 1.6, 1.4, 1.3, 1.3, 1.5, 1.4, 1.4, 1.5, 1.3, 1.2, 1.4, 1.4, 1.4, 1.3, 1.2, 1.2, 1.5, 1.4, 1.4, 1.2, 1.2, 1.1, 1.2, 1.1, 1.2, 1.0, 1.2, 0.9, 1.2, 1.0, 1.0, 0.9, 1.2, 1.0, 0.9, 1.1, 1.0, 1.0, 1.0, 0.9, 0.8, 1.1, 0.8, 0.8, 0.8, 0.9, 0.6, 0.7, 0.7, 0.6, 0.5, 0.6, 0.5, 0.7, 0.4, 0.6, 0.4, 0.6, 0.5, 0.4, 0.5, 0.4, 0.4, 0.5, 0.4, 0.3, 0.3, 0.2, 0.3, 0.2, 0.0, 0.4, 0.2, 0.3, 0.2, 0.3, 0.2, 0.4, 0.3, 0.2, 0.3, 0.4, 0.2, 0.3, 0.3, 0.3, 0.1, 0.2, 0.2, 0.2, 0.2, 0.3, 0.2, 0.1, 0.1, 0.2, 0.2, 0.2, 0.2, 0.3, 0.1, 0.1, 0.2, 0.3, 0.2, 0.2, 0.3, 0.4, 0.3, 0.3, 0.2, 0.5, 0.4, 0.4, 0.4, 0.3, 0.4, 0.3, 0.3, 0.5, 0.4, 0.6, 0.6, 0.4, 0.4, 0.3, 0.3, 0.3, 0.4, 0.4, 0.2, 0.4, 0.3, 0.4, 0.4, 0.5, 0.3, 0.4, 0.4, 0.3, 0.4, 0.5, 0.3, 0.6, 0.5, 0.5, 0.3, 0.4, 0.3, 0.4, 0.3, 0.3, 0.3, 0.3, 0.4, 0.3, 0.3, 0.4, 0.5, 0.3, 0.3, 0.3, 0.3, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.3, 0.2, 0.3, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.3, 0.2, 0.1, 0.3, 0.3, 0.2, 0.1, 0.2, 0.1, 0.0, 0.1, 0.1, 0.0, 0.1, 0.1, 0.2, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.2, 0.3, 0.1, 0.1, 0.2, 0.1, 0.2, 0.3, 0.1, 0.2, 0.2, 0.0, 0.3, 0.2, 0.2, 0.2, 0.1, 0.2, 0.3, 0.1, 0.2, 0.2, 0.2, 0.2, 0.3, 0.2, 0.1, 0.2, 0.3, 0.2, 0.2, 0.3, 0.0, 0.2, 0.3, 0.3, 0.3, 0.3, 0.2, 0.2, 0.2, 0.2, 0.3, 0.5, 0.3, 0.2, 0.3, 0.0, 0.4, 0.4, 0.4, 0.4, 0.3, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.4, 0.3, 0.5, 0.2, 0.4, 0.3, 0.3, 0.3, 0.4, 0.5, 0.3, 0.3, 0.5, 0.3, 0.3, 0.3, 0.2, 0.5, 0.3, 0.3, 0.3, 0.2, 0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.3, 0.2, 0.3, 0.2, 0.3, 0.0, 0.3, 0.2, 0.3, 0.2, 0.3, 0.2, 0.2, 0.3, 0.1, 0.2, 0.1, 0.2, 0.1, 0.1, 0.2, 0.1, 0.2, 0.3, 0.2, 0.3, 0.1, 0.3, 0.3, 0.3, 0.2, 0.3, 0.3, 0.2, 0.1, 0.1, 0.2, 0.5, 0.3, 0.2, 0.3, 0.2, 0.5, 0.4, 0.5, 0.3, 0.4, 0.3, 0.3, 0.6, 0.5, 0.5, 0.5, 0.6, 0.5, 0.4, 0.5, 0.5, 0.6, 0.6, 0.7, 0.7, 0.8, 0.8, 0.7, 0.7, 0.8, 0.8, 1.0, 0.8, 0.9, 0.9, 0.8, 1.0, 0.8, 1.0, 1.1, 0.8, 1.0, 1.2, 1.1, 0.9, 1.2, 1.2, 1.1, 1.2, 1.2, 1.2, 1.3, 1.2, 1.4, 1.3, 1.3, 1.3, 1.3, 1.5, 1.5, 1.3, 1.4, 1.3, 1.5, 1.4, 1.6, 1.5, 1.5, 1.6, 1.8, 1.5, 1.5, 1.8, 1.7, 1.8, 1.8, 1.8, 1.8, 1.7, 1.8, 2.0, 2.1, 2.0, 2.1, 2.0, 2.2, 2.3, 2.4, 2.5, 2.4, 2.5, 2.6, 2.9, 2.9, 3.2, 3.3, 3.5, 3.6, 3.5, 3.7, 3.9, 4.3, 4.5, 4.5, 4.7, 5.1, 5.1, 5.4, 5.5, 5.8, 6.2, 6.5, 6.5, 6.8, 6.8]
+        var stb_cfg, db, ss, dmd, version, xhr, evtSource, get_events;
+        var pu = 0;
+        console.log("pu =", pu);
+        let adr = "-.-.-.-";
+        let addr = $("ip");
+        var r = $("ret");
+        var selTP = $("my_tpselect");
+        var selSAT = $("my_select");
+        var channelList = $("my_channel_list_select");
+        var storage = window.localStorage;
+        console.log(storage.getItem("stb-ip"));
+        if (storage.getItem("stb-ip") == null) storage.setItem("stb-ip", adr);
+        addr.placeholder = storage.getItem("stb-ip");
+        //----------connect checker----------------------------------------------------
+        var pucker = setInterval(function () {
+            pu++;
+            $("status").innerHTML = 'Connecting Request: ' + pu;
+            get_ver();
+        }, 1200);
+        //-----------------------------------------------------------------
+        let counter = 0;
+        let myDate = new Date();
+        let millis = Date.now();
+        //
+        let gain = 0,
+            gain_cnt = 0;
+        //spectrum drawing
+        let y = x => x * x; // ôóíêöèÿ
+        let z = 40; // ìàñøòàá
+        let e = $("sp_lck_btn")
+        let b = $("spectrum_only");
+        //   let c = document.querySelector('canvas');
+        let c = $("spectrum");
+        let d = $("signal");
+        let f = $("snr_only");
+        //   let g = document.getElementById("lpg_db_line");
+        let ctx = c.getContext('2d');
+        //   let dtx = g.getContext('2d');
+        //
+        let beta, beta_timer = 0;
+        let sat_list_array, tp_list_array;
+        let findMode = 'spectrum';
+        let eventList = document.querySelector('ul');
+        // signal bars drawing
+        let notLockUpdateTimer = 0;
+        let snr_plus = 0;
+        let lm_snr_plus = 0;
+        let lpg_i = 0;
+        let k = 0;
+        let sr = 0;
+        let last_lpg = 0,
+            last_min_raw = 0;
+        document.getElementById("signal").hidden = true;
+        //=========================================================================================
+        function get_ver() {
+            xhr = new XMLHttpRequest();
+            console.log(xhr.readyState, "pu =", pu);
+            xhr.timeout = 900;
+            xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=version');
+            xhr.send();
+            xhr.onload = function () {
+                if (xhr.status != 200) {
+                    console.log(xhr.status + ': ' + xhr.statusText);
+                    //alert(xhr.status + ': ' + xhr.statusText);
+                    $("finder").style.display = "none";
+                    $("debug").style.display = "none";
+                    //  document.getElementById("finder_mode").style.display = "inline";
+                }
+                else {
+                    clearInterval(pucker);
+                    version = JSON.parse(xhr.responseText)
+                        //{"ret_code": "NO_ERR", "stb_name": "SR-508HD", "version": {"stb": "SR508HD 1.27 xRU 29.10.2021", "web_api": "1.17", "base_struct": "01.01.01.01.01.05", "comment": "base, status, sat, tp, pg, rpt"}, "card_inserted": "false", "channels_exist": "true", "streaming_channel": "false", "serial": "CB7FF175DC99B7FF", "events": "true", "sleep": "false"}
+                        //{"ret_code": "NO_ERR", "stb_name": "SR-508HD", "version": {"stb": "SR508HD 1.27 xRU 29.10.2021", "web_api": "1.17", "base_struct": "01.01.01.01.01.05", "comment": "base, status, sat, tp, pg, rpt"}, "card_inserted": "false", "channels_exist": "true", "streaming_channel": "true", "serial": "CB7FF175DC99B7FF", "events": "false", "sleep": "false"}
+                    $("ver").innerHTML = version.version.stb;
+                    var q = version.serial;
+                    $("hw_id").innerHTML = q.slice(0, 4) + ':' + q.slice(4, 8) + ':' + q.slice(8, 12) + ':' + q.slice(12, 16);
+                    $("box_name").innerHTML = version.stb_name;
+                    evtSource = new EventSource('http://' + storage.getItem("stb-ip") + '/public?command=startEvents');
+                    evtSource.onerror = function (e) {
+                        //    console.log(e.ret_code);
+                        //    console.log("Event: error ");
+                        if (this.readyState == EventSource.CONNECTING) {
+                            console.log(`Reconnecting (readyState=${this.readyState})...`);
+                        }
+                        else {
+                            console.log("Error has occured. ");
+                            $("finder").style.display = "none";
+                            $("debug").style.display = "none";
+                            //  document.getElementById("finder_mode").style.display = "inline";
+                        }
+                    };
+                    //=========================================================================
+                    evtSource.addEventListener('update', function (e) {
+                        // new stb message parse ---------------------------------------------
+                        //  {"status_code": "SYS_NOT_STARTED_ERR"}
+                        //  {"ret_code": "ONE_CLIENT_ALLOWED_ERR"}
+                        //  {"ret_code": "STB_BUSY_ERR"}
+                        //  {"smartcard_info_progress": 2, "tune_mode": 5, "smartcard_info": {"serial": "", "version": "00", "name": "CONAX"}, "entitle_info": [ ]}
+                        //  {"lock": 0, "mode": 0, "tune_mode": 0, "carrier_offset": 65535, "lpg": 7027, "snr": 0.0, "lm_snr": 0.0, "alfa": -8.7, "beta": -47.6, "gamma": 42.4, "version": "0101","lnb3d_voltage": 15785, "lnb_current": 138, "lnb_voltage": 18287, "psu_voltage": 11740, "scan_status": "SCAN_WAITING_LOCK"}
+                        //  {"pwm": 73, "tune_mode": 1, "lpg": 7017, "alfa": -8.6, "beta": -47.6, "gamma": 42.4, "version": "0101","lnb3d_voltage": 15785, "lnb_current": 138, "lnb_voltage": 18287, "psu_voltage": 11740, "spectrum_array": [ 838,839,840,842,844,845,847,849,852,855,857,858,859,862,864,865,867,867,869,869,870,870,871,872,873,873,873,873,875,876,875,878,879,880,879,878,879,877,877,878,878,879,879,879,878,878,878,878,878,877,879,880,881,880,881,881,880,880,878,881,881,882,882,881,882,880,880,880,880,881,879,880,879,879,880,880,882,882,883,883,883,882,881,882,882,881,882,882,883,883,881,881,881,881,880,880,882,883,882,882,884,883,882,883,883,883,883,883,883,882,881,881,879,878,878,880,881,880,881,882,883,881,881,881,879,879,878,878,877,879,880,880,878,879,880,879,878,879,879,877,876,876,874,873,873,873,872,872,874,874,873,875,877,876,875,875,876,875,873,874,874,873,872,872,872,872,871,872,875,873,873,872,872,873,870,870,869,869,870,869,869,868,868,867,865,866,865,866,866,867,868,868,869,869,867,866,865,864,864,864,865,865,867,867,866,866,866,865,864,863,863,862,862,862,862,862,862,864,865,864,865,866,866,863,864,863,863,864,864,865,863,864,865,864,864,864,864,862,862,861,861,860,861,861,860,861,862,862,862,863,863,863,863,864,864,863,862,861,859,858,858,858,858,858,861,860,861,861,860,861,861,860,860,859,861,858,857,856,857,858,858,859,858,859,858,858,857,858,858,857,858,858,858,857,855,857,854,854,853,852,854,855,856,856,857,857,857,854,855,854,853,854,854,857,856,857,857,858,858,858,857,858,859,857,856,855,856,856,857,858,860,860,861,860,860,861,861,860,860,862,862,861,860,859,860,859,859,859,860,861,860,860,860,862,861,860,861,861,860,859,858,860,860,859,859,858,858,858,857,858,858,860,861,861,861,861,861,862,860,860,858,860,858,857,858,859,860,858,858,859,858,858,857,858,858,856,854,854,854,853,854,856,858,858,857,857,856,855,854,853,853,854,853,853,852,853,854,853,854,855,855,855,855,856,855,856,856,856,855,855,855,854,855,855,855,857,857,856,856,856,855,854,854,855,854,856,856,855,855,853,855,853,853,853,852,853,852,852,852,851,852,852,850,849,848,847,843,840,838,836,833,832,831,830,829,827,827,823,822,821 ]}
+                        //console.log(e.data)
+                        measure = JSON.parse(e.data);
+                        //-------------status check------------------------------------------------
+                        console.log("ret_code", measure.ret_code);
+                        if (measure.status_code == "SYS_NOT_STARTED_ERR") {
+                            // $("status").style.color = "orangered";
+                            // $("status").innerHTML = "Restart connection";
+                            //getSatList();
+                            // console.log("red2");
+                            //tpListSelected();
+                            pu = 0;
+                            evtSource.close();
+                            setTimeout(function () {
+                                //console.log("red");
+                                get_ver();
+                            }, 1000);
+                        }
+                        if (measure.ret_code == undefined && $("status").innerHTML != "Connected") {
+                            $("status").style.color = "limegreen";
+                            $("status").innerHTML = "Connected";
+                            getSatList();
+                        }
+                        else if (measure.ret_code != null) {
+                            $("status").style.color = "orangered";
+                            if (measure.ret_code == "KEY_PRESSED_ERR") $("status").innerHTML = "Busy by TV User";
+                            if (measure.ret_code == "ONE_CLIENT_ALLOWED_ERR") $("status").innerHTML = "Busy by APP User";
+                            if (measure.ret_code == "STB_BUSY_ERR") $("status").innerHTML = "Operation is not finished";
+                            if (measure.ret_code == "STREAMING_ERR") $("status").innerHTML = "Busy by IPTV User";
+                            pu = 0;
+                            evtSource.close();
+                            setTimeout(function () {
+                                //console.log("red");
+                                get_ver();
+                            }, 1000);
+                        }
+                        // ----------  stb messages FPS  calculations -------------------------
+                        dtt = Date.now() - millis;
+                        if (Date.now() - millis >= 1000) {
+                            document.getElementById("fps").innerHTML = counter;
+                            //console.log('fps=' + counter + ' dt=' + dtt + ' ' + e.data);
+                            gain /= counter;
+                            //document.getElementById("gain ").innerHTML = measure.gain;
+                            gain = 0;
+                            counter = 0;
+                            millis = Date.now();
+                        }
+                        gain += measure.lpg;
+                        counter++;
+                        //========================================================================
+                        //------- lock status check ----------------------------------------------
+                        if (measure.tune_mode == 0) {
+                            if (measure.scan_status == "SCAN_WAITING_LOCK") {
+                                var channelList = $("my_channel_list_select");
+                                channelList.length = 0;
+                            }
+                            else {
+                                if (measure.service_data.scan_status == "SCAN_DONE") {
+                                    var channelList = document.getElementById("my_channel_list_select");
+                                    //var win1251 = new TextDecoder("windows-1251 ");
+                                    channelList.length = 0;
+                                    for (var i = 0; i < measure.service_data.channel_num; i++) {
+                                        option = document.createElement('option');
+                                        option.value = i;
+                                        option.innerHTML = "[ " + measure.service_data.channel_list[i].provider + "] " + (measure.service_data.channel_list[i].scrambled ? "*" : "") + measure.service_data.channel_list[i].name;
+                                        channelList.appendChild(option);
+                                        //console.log(option.innerHTML);
+                                        //console.log("UNICODE="+" \u0440\u033\u0450 ");
+                                        //console.log('name=' + measure.channel_list[ i ].name + ' svc=' + measure.channel_list[ i ].svc_id);
+                                    }
+                                    console.log(measure);
+                                }
+                                //console.log(measure);
+                                if (measure.nit_data.scan_status == "NIT_DONE") {
+                                    console.log(measure);
+                                    console.log('name=' + measure.nit_data.nit_name);
+                                    for (var i = 0; i < measure.nit_data.tp_num; i++) {
+                                        console.log('service_num=' + measure.nit_data.tp_list[i].service_num + ' ts_id=' + measure.nit_data.tp_list[i].stream_id + ' orbital_position=' + measure.nit_data.tp_list[i].orbital_position);
+                                    }
+                                }
+                            }
+                            //        document.getElementById("lock-stage").innerHTML = measure.mode.toString(2).padStart(8, "0 ") + '[' + measure.mode.toString(16).padStart(2, "0 ").toUpperCase() + ']';
+                            if (measure.lock == 1) {
+                                $("lock_figure").style.fill = "#32CD32"; //green
+                                //      document.getElementById("Lock").innerHTML = "Locked";
+                                //        document.getElementById("Lock").style.visibility = 'visible';
+                                //calculate Currier Offset in MHz
+                                $("lock_status").innerHTML = 'Carrier offset, MHz:' + (measure.carrier_offset / 1000).toFixed(1);
+                            }
+                            else {
+                                $("lock_figure").style.fill = "#FF0038"; //red
+                                //       document.getElementById("Lock").style.visibility = 'hidden';
+                                //delete Currier Offset value
+                                $("lock_status").innerHTML = "Carrier offset, MHz:";
+                            };
+                            //{"lock": 1, "mode": 0, "tune_mode": 0, "carrier_offset": 19, "lpg": 5780, "snr": 13.1, "lm_snr": 6.2, "alfa": 46.2, "beta": 51.0, "gamma": -39.0, "version": "0101","lnb3d_voltage": 15785, "lnb_current": 138, "lnb_voltage": 18287, "psu_voltage": 11740, "service_data": {"scan_status": "SCAN_ALREADY_SEND"}, "nit_data": {"scan_status": "NIT_ALREADY_SEND"}}
+                            //---------------------rotations measures -----------------------------
+                            if (Math.abs(measure.beta - beta) > 2) {
+                                if (beta_timer == 0) {
+                                    beta_timer = Date.now();
+                                    measure.beta = beta;
+                                }
+                            }
+                            if (beta_timer) {
+                                if (beta_timer + 500 <= Date.now()) {
+                                    beta_timer = 0;
+                                    beta = measure.beta;
+                                }
+                                else {
+                                    measure.beta = beta;
+                                }
+                            }
+                            else {
+                                beta = measure.beta;
+                            }
+                            //------------------ snr/lm bar calculations ------------------------
+                            // snr max level 20dB
+                            // snr bar length 400px
+                            // red bar (snr-lm) above green (snr) bar
+                            //console.log("meas-mode/snr", measure.mode, measure.snr);
+                            snr_plus = +measure.snr;
+                            /*   if (measure.mode - 15 >= 0 && measure.snr > 0) {
+                                   snr_plus = measure.snr;
+                                   notLockUpdateTimer = 0;
+                               }
+                               else {
+                                   if (notLockUpdateTimer == 0) {
+                                       notLockUpdateTimer = Date.now();
+                                   }
+                                   else
+                                   if (Date.now() - notLockUpdateTimer > 500) {
+                                       notLockUpdateTimer = 0;
+                                       snr_plus = 0;
+                                       lm_snr_plus = 0;
+                                   }
+                               }  */
+                            //
+                            if (measure.lock != 1) {
+                                snr_plus = 0;
+                                lm_snr_plus = 0;
+                            }
+                            //console.log("snr+", snr_plus);
+                            $("snr_bar").style.backgroundColor = "#32CD32"; //green
+                            if (snr_plus * 20 >= 400) {
+                                x1 = 400 + 'px';
+                            }
+                            else {
+                                x1 = snr_plus * 20 + 'px';
+                            }
+                            //console.log("x1", x1);
+                            $("snr_bar").style.width = x1; //green
+                            $("lm_bar").style.backgroundColor = "#FF0038"; //red
+                            //console.log("meas-lm.snr", measure.lm_snr);
+                            if (measure.lm_snr >= 0) {
+                                x2 = (snr_plus - measure.lm_snr) * 20 + 'px';
+                            }
+                            else {
+                                x2 = 0;
+                                $("snr_bar").style.backgroundColor = "#FF0038"; //red
+                            }
+                            $("lm_bar").style.width = x2; // red
+                            //-------- snr/lm measures output -------------------------------------
+                            $("snr_db").innerHTML = snr_plus.toFixed(1);
+                            $("snr_db_2").innerHTML = (snr_plus * 5).toFixed(1) + " %";
+                            $("lm_db").innerHTML = measure.lm_snr.toFixed(1);
+                        }
+                        //========================================================================
+                        if (measure.tune_mode == 3) {
+                            if (measure.tp_num > 0) {
+                                var selTP = document.getElementById("my_tpselect");
+                                var selSAT = document.getElementById("my_select");
+                                var tone = {
+                                        enabled: 0
+                                    },
+                                    sr;
+                                if (selTP.length > 0) {
+                                    for (i = 0; i < measure.tp_num; i++) {
+                                        tp_freq = dvbs_calc_tp_freq(measure.tp_list[i].rf_frequency / 1000, tp_list_array[selTP.selectedIndex], sat_list_array[selSAT.selectedIndex], tone);
+                                        console.log("SAT=" + selSAT.selectedIndex + " tp_freq=" + tp_freq + " sr=" + measure.tp_list[i].tp_sr);
+                                    }
+                                }
+                            }
+                            console.log(measure);
+                            //{" blind_scan_progress ": 4, , "tune_mode ": 3, "tp_num ": 1, "rf_frequency ": 1035364, "tp_sr ": 27500}
+                        }
+                        //========================================================================
+                        if (measure.tune_mode == 4) {
+                            console.log(measure);
+                        }
+                        //------------------spectrum and gain calculations ------------------------
+                        let max = 0,
+                            min = 1000,
+                            max_c = 0,
+                            min_c = 1000,
+                            min_l = 1000,
+                            min_r = 1000,
+                            db = 0,
+                            mult_spectr = 1;
+                        // scan progress
+                        //{"channel_scan_progress": 0, "tune_mode": 4, "tp_num": 0,"tv_num": 0, "radio_num": 0, "full_db_flag": 0, "finished_flag": 0, "stopped_flag": 0, "destroyed_flag": 0,  "start_err": 0}
+                        if (measure.tune_mode == 4) {
+                            $("channels_scan_btn").innerHTML = 'Channel Scan ' + measure.channel_scan_progress + '%';
+                        }
+                        // report progress
+                        if (measure.tune_mode == 2) {
+                            if (measure.scan_progress == 255) {
+                                $("create_report_btn").innerHTML = 'Diagnostic Aborted';
+                            }
+                            if (measure.scan_progress >= 100) {
+                                $("create_report_btn").innerHTML = 'Diagnostic'
+                                tpListSelected();
+                                c_ahmed();
+                            }
+                            else {
+                                $("create_report_btn").innerHTML = 'Diagnostic ' + measure.scan_progress + '%';
+                            }
+                        }
+                        else if (measure.tune_mode <= 1) {
+                            //-----------------elevation dish rotation calculations -------------
+                            $("dish").style.rotate = measure.alfa;
+                            let x3 = -18 - measure.alfa;
+                            $("dish").style.transform = 'rotate(' + x3 + 'deg)';
+                            //---------------- lnb skew rotation calculations -------------------
+                            let x4 = -measure.beta;
+                            document.getElementById("lnb").style.transform = 'rotate(' + x4 + 'deg)';
+                            //---------------- accelerometer measures debug output --------------
+                            document.getElementById("alfa_degree").innerHTML = measure.alfa.toFixed(1);
+                            document.getElementById("beta_degree").innerHTML = measure.beta.toFixed(1);
+                            document.getElementById("gamma_degree").innerHTML = measure.gamma.toFixed(1);
+                            //--------lnb skew bar calculations ----------------------------------
+                            //           to do orbital calculations
+                            //           let sat_elevation = 10;
+                            //           let sat_skew = 30;
+                            //--------------------------------------------------------------------
+                            // fine tune lnb skew bar max range -8....+8 degree by red and opposite arrow
+                            // lnb skew bar length 200px
+                            // ok lnb skew tune range -1...+1 degree by green and OK text notes
+                            //--------------------------------------------------------------------
+                            // gps 53.9N 27.6E
+                            // 13e=-10.4
+                            // 75e=28.3
+                            // 85e=31.6
+                            let sat_skew = 31.6;
+                            let skewing = measure.beta + sat_skew;
+                            // lnb skew bar limiting by +/-8 degree
+                            if (skewing > 8) {
+                                x = 8;
+                            }
+                            else if (skewing < -8) {
+                                x = -8;
+                            }
+                            else {
+                                x = skewing;
+                            }
+                            x = 100 * x / 8
+                                // 0 degree coordinate calculation
+                            if (skewing > 0) {
+                                document.getElementById("skew-bar").style.x = 101 - x;
+                                document.getElementById("skew-bar").style.width = x;
+                            }
+                            else {
+                                document.getElementById("skew-bar").style.x = 101 + x;
+                                document.getElementById("skew-bar").style.width = -x;
+                            }
+                            // red/green range calculation
+                            if (skewing > 1) {
+                                //document.getElementById("skew").style.transform = 'scale(1, 1)'; // Reverse the bar
+                                document.getElementById("skew").style.transform = 'scale(-1, 1)';
+                                document.getElementById("arrow-s").style.visibility = 'visible';
+                                document.getElementById("skew-ok").style.visibility = 'hidden';
+                                document.getElementById("skew-bar").style.fill = "#FF0038"; //red
+                            }
+                            else if (skewing < -1) {
+                                //document.getElementById("skew").style.transform = 'scale(-1, 1)'; // Reverse the bar
+                                document.getElementById("skew").style.transform = 'scale(1, 1)';
+                                document.getElementById("arrow-s").style.visibility = 'visible';
+                                document.getElementById("skew-ok").style.visibility = 'hidden';
+                                document.getElementById("skew-bar").style.fill = "#FF0038"; //red
+                            }
+                            else {
+                                document.getElementById("arrow-s").style.visibility = 'hidden';
+                                document.getElementById("skew-ok").style.visibility = 'visible';
+                                document.getElementById("skew-bar").style.fill = "#32CD32"; //green
+                                document.getElementById("skew-ok").innerHTML = "OK";
+                            }
+                            //--------elevation bar calculations ----------------------------------
+                            //           to do orbital calculations
+                            //           let sat_elevation = 10;
+                            //           let sat_skew = 30;
+                            //-----------------------------------------------------------------
+                            // fine tune elevation bar max range -8....+8 degree by red and opposite arrow
+                            // elevation bar length 300px
+                            // ok elevation tune range -1...+1 degree by green and OK text notes
+                            //-----------------------------------------------------------------
+                            // gps 53.9N 27.6E
+                            // 13e = 27.1    -37.3
+                            // 75e = 15.1
+                            // 85e = 10
+                            // 13e supral real value = -10.2 // 27.1-37.3=-10.2
+                            // tricolor supral d=0.55 fd=0.7
+                            let sat_elevation = 10;
+                            let dish_offset = 37.3;
+                            let elevate = measure.alfa + dish_offset - sat_elevation;
+                            // elevation bar limiting by +/-8 degree
+                            if (elevate > 8) {
+                                x = 8;
+                            }
+                            else if (elevate < -8) {
+                                x = -8;
+                            }
+                            else {
+                                x = elevate;
+                            }
+                            x = 150 * x / 8;
+                            // 0 degree coordinate calculation
+                            if (elevate > 0) {
+                                document.getElementById("elevation-bar").style.height = x;
+                            }
+                            else {
+                                document.getElementById("elevation-bar").style.height = -x;
+                            }
+                            // red/green range calculation
+                            if (elevate > 1) {
+                                document.getElementById("elevation").style.transform = 'scale(1, -1)';
+                                document.getElementById("arrow-e").style.visibility = 'visible';
+                                document.getElementById("elevation-ok").style.visibility = 'hidden';
+                                document.getElementById("elevation-bar").style.fill = "#FF0038 "; //red
+                            }
+                            else if (elevate < -1) {
+                                document.getElementById("elevation").style.transform = 'scale(1, 1)';
+                                document.getElementById("arrow-e").style.visibility = 'visible';
+                                document.getElementById("elevation-ok").style.visibility = 'hidden';
+                                document.getElementById("elevation-bar").style.fill = "#FF0038 "; //red
+                            }
+                            else {
+                                document.getElementById("arrow-e").style.visibility = 'hidden';
+                                document.getElementById("elevation-ok").style.visibility = 'visible';
+                                document.getElementById("elevation-bar").style.fill = "#32CD32"; //green
+                                document.getElementById("elevation-ok").innerHTML = "OK";
+                            }
+                            //-------------spectrum and gain calculations ------------------------
+                            fft_read_size = 512 - 32; //256-48+48;
+                            ctx.clearRect(0, 0, c.width, c.height);
+                            //---------------------------------------------------------------
+                            ctx.strokeStyle = "red";
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx['moveTo']((fft_read_size * 400 / 480) / 2, 0);
+                            ctx['lineTo']((fft_read_size * 400 / 480) / 2, c.height);
+                            ctx.stroke();
+                        }
+                        //-------------------------------------------------------------------
+                        function convert_to_db(raw_measure) {
+                            db = raw_measure.spectrum_array[i] / 10 - 68 + callibration_array[i];
+                            db += (112 - 20 - measure.lpg / 100)
+                            return db;
+                        }
+                        //------------------------------------------------------------------
+                        if (measure.tune_mode == 1) {
+                            //--------------- measure H gride -------------------------------
+                            //           let str = '';
+                            //            for (let i = 0; i < 9; i++) {
+                            //              str = str + i;
+                            //            }
+                            //---------------------------------------------------------------
+                            drawTPBandwidth();
+                            //console.log(ss);
+                            sr = ss;
+                            //-------- measure H gride ---------------------------------------
+                            let str = '';
+                            for (let i = 1; i < 10; i++) {
+                                ctx.strokeStyle = "#C0C0C0";
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx['moveTo'](0, 320 - i * 32);
+                                ctx['lineTo'](400, 320 - i * 32);
+                                ctx.stroke();
+                            }
+                            //=====================================================================
+                            ctx.strokeStyle = "blue";
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            db = convert_to_db(measure);
+                            ctx['moveTo'](0, 320 - db * 320 / 100);
+                            //----- sr-left db min/ sr-right db min/ currier ------------------
+                            var i = fft_read_size / 2;
+                            max_c = convert_to_db(measure);
+                            //console.log("max", max_c, "sr", sr);
+                            //-----------------------------------------------------------------
+                            for (var i = ((fft_read_size - sr * fft_read_size / 90) / 2).toFixed(0); i < (fft_read_size / 2); i++) {
+                                db = convert_to_db(measure);
+                                //     console.log('i=' + i + '  db=' + db.toFixed(1));
+                                if (db < min_l) min_l = db;
+                            }
+                            //-------------------------------------------------------------------
+                            for (var i = (fft_read_size / 2); i < ((fft_read_size + sr * fft_read_size / 90) / 2).toFixed(0); i++) {
+                                db = convert_to_db(measure);
+                                if (db < min_r) min_r = db;
+                            }
+                            //-----------------------------------------------------------------
+                            min_raw = 100000;
+                            //----------------------------------------------------------------
+                            for (var i = 0; i < (fft_read_size); i++) {
+                                db = convert_to_db(measure);
+                                if (db > max) max = db;
+                                if (db < min) min = db;
+                                ctx['lineTo'](i * 400 / 480, 320 - db * 320 / 100);
+                                ctx['moveTo'](i * 400 / 480, 320 - db * 320 / 100);
+                            }
+                            ctx.stroke();
+                            //----max spectrum line--------------------------------------------
+                            ctx.strokeStyle = "red";
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx['moveTo'](0, 320 - max * 320 / 100);
+                            ctx['lineTo'](400, 320 - max * 320 / 100);
+                            ctx.stroke();
+                            //-----min spectrum line ------------------------------------------
+                            ctx.strokeStyle = "red";
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx['moveTo'](0, 320 - min * 320 / 100);
+                            ctx['lineTo'](400, 320 - min * 320 / 100);
+                            ctx.stroke();
+                            //------------------------------------------------------------------
+                            //          document.getElementById("cnr ").innerHTML = (max - min).toFixed(1);
+                            //console.log("l", min_l, "r", min_r)
+                            min_c = (min_l + min_r) / 2;
+                            if (sr == 0) min_c = max_c;
+                            if (min_c > max_c) min_c = max_c;
+                            //console.log("sr", sr, "max", max_c, "min", min_c)
+                            //         console.log('sr=' + sr.toFixed(1) + '  max_c=' + max_c.toFixed(1) + '  min_c=' + min_c.toFixed(1) + '  min_l=' + min_l.toFixed(1) + '  min_r=' + min_r.toFixed(1));
+                            //    document.getElementById("gain").innerHTML = measure.lpg.toFixed(1);
+                            document.getElementById("cnr_value").innerHTML = '<h3>C/N, dB: </h3><h1>' + (max_c - min_c).toFixed(1) + '</h1><h3>RSSImax, dBuV: </h3><h1>' + max.toFixed(1) + '</h1><h3>RSSImin, dBuV: </h3><h1>' + min.toFixed(1); + '</h1>';
+                            //
+                            //console.log('rssi min;' + min.toFixed(1) + ';rssi max;' + max.toFixed(1) + ';diff;' + (max - min).toFixed(1) + ';gain;' + measure.lpg.toFixed(1) + ';pwm;' + measure.pwm.toFixed(1));
+                        }
+                        if (measure.tune_mode == 7) {
+                            //{"tune_mode": 7, "card_inserted": "false"}
+                            console.log("restart page");
+                            pu = 0;
+                            evtSource.close();
+                            setTimeout(function () {
+                                //console.log("red");
+                                get_ver();
+                            }, 1000);
+                        }
+                    });
+                };
+            };
+        }
+                                //========================================================================
+/** test and average time took to download image from server, called recursively timesToTest times */
+var arrTimes = [];
+var latency_i = 0; // start
+var timesToTest = 2;
+var tThreshold = 150; //ms
+var testImage = "http://www.google.com/images/phd/px.gif"; // small image in your server
+var dummyImage = new Image();
+
+// testLatency(function(avg){
+//   /** output */
+//   document.getElementById("latency").innerHTML = avg.toFixed(2) + "ms";
+// });
+function testLatency(cb) {
+  var tStart = new Date().getTime();
+  if (latency_i<timesToTest-1) {
+    dummyImage.src = testImage + '?t=' + tStart;
+    dummyImage.onload = function() {
+      var tEnd = new Date().getTime();
+      var tTimeTook = tEnd-tStart;
+      arrTimes[latency_i] = tTimeTook;
+      testLatency(cb);
+      latency_i++;
+    };
+  } else {
+    /** calculate average of array items then callback */
+    var sum = arrTimes.reduce(function(a, b) { return a + b; });
+    var avg = sum / arrTimes.length;
+    cb(avg);
+  }
+}
+
+function ping() {
+    // This is HTTP Request (Response Duration)
+    var started = new Date().getTime();
+
+    var http = new XMLHttpRequest();
+
+    http.open("GET", 'http://' + storage.getItem("stb-ip")+ '/public?command=version' , /*async*/true);
+    http.onreadystatechange = function() {
+    if (http.readyState == 4) {
+        var ended = new Date().getTime();
+
+        var milliseconds = ended - started;
+
+        document.getElementById("latency").innerHTML = milliseconds/100 + "ms";
+    }
+    };
+    try {
+    http.send(null);
+    } catch(exception) {
+    // this is expected
+    }
+}
+
+ping();
+
+setInterval(ping, 5000);
+
+
+        //=====================================================================
+        function getSatList() {
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=returnSATList', false);
+            xhr.send();
+            //--------------------------------------------------------------------
+            if (xhr.status != 200) {
+                //alert(xhr.status + ': ' + xhr.statusText); // Ð²Ñ‹Ð²Ð¾Ð´: 404: Not Found
+                $("finder").style.display = "none";
+                $("debug").style.display = "none";
+                //  document.getElementById("finder_mode").style.display = "inline";
+            }
+            else { // Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚
+                var sel = $("my_select");
+                var option;
+                /*                    sel.onchange = function() {
+                                        console.log(` = ' + sel.value);
+                                    };*/
+                //-----------------------------------------------------------------
+                sat = JSON.parse(xhr.responseText);
+                if (sat.sat_num > 0) {
+                    $("finder").style.display = "inline";
+                    $("debug").style.display = "inline";
+                    // document.getElementById("finder_mode").style.display = "none";
+                }
+                sat_list_array = sat.sat_list;
+                for (var i = 0; i < sat.sat_num; i++) {
+                    option = document.createElement('option');
+                    option.value = sat.sat_list[i].sat_id;
+                    option.innerHTML = sat.sat_list[i].sat_degree.padStart(5, "0") + sat.sat_list[i].direction + ' ' + sat.sat_list[i].sat_name;
+                    sel.appendChild(option);
+                }
+                satListSelected();
+            }
+        }
+        //=========================================================================================
+        function c_ahmed(event) {
+            var c_frequency = document.getElementById("c_frequency");
+            var c_sr = document.getElementById("c_sr");
+            var c_type = document.querySelector("#c_type");
+
+            var c_frequency_value = parseInt(c_frequency.value);
+            var c_sr_value = parseInt(c_sr.value);
+            var c_type_value = parseInt(c_type.options[c_type.selectedIndex].value);
+
+            if (!Number.isNaN(c_frequency_value) && !Number.isNaN(c_type_value) && !Number.isNaN(c_sr_value)) {
+                tpListSelectedAhmed(c_frequency_value, c_sr_value, c_type_value);
+            }
+
+            return false;
+        }
+        //=========================================================================================
+        function satListSelected() {
+            //    console.log("=" + selSAT.selectedIndex);
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=returnTPList&sat_id=' + selSAT.value, false);
+            xhr.send();
+            if (xhr.status != 200) { // Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð¾ÑˆÐ¸Ð±ÐºÑƒ
+                // alert(xhr.status + ': ' + xhr.statusText); // Ð²Ñ‹Ð²Ð¾Ð´: 404: Not Found
+                $("finder").style.display = "none";
+                $("debug").style.display = "none";
+                //  document.getElementById("finder_mode").style.display = "inline";
+            }
+            else { // Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚
+                var sel = document.getElementById("my_tpselect");
+                var option;
+                sel.length = 0;
+                tp = JSON.parse(xhr.responseText);
+                tp_list_array = tp.tp_list;
+                for (var i = 0; i < tp.tp_num; i++) {
+                    option = document.createElement('option');
+                    option.value = tp.tp_list[i].id;
+                    option.innerHTML = tp.tp_list[i].freq + (tp.tp_list[i].polarity ? " V " : " H ") + tp.tp_list[i].sr;
+                    sel.appendChild(option);
+                }
+                //       dmd = sat_list_array[selSAT.selectedIndex].sat_mode;
+                //       console.log("dmd=", dmd);
+                //       if (dmd != 0) {
+                //    $('#spectrum_only_3, #spectrum_only_4').addClass('hide-me');
+                //       }
+                //       else {
+                //    $('#spectrum_only_3, #spectrum_only_4').removeClass('hide-me');
+                //       }
+                tpListSelected();
+                c_ahmed();
+            }
+        }
+        //=========================================================================================
+        function tpListSelected() {
+            var tone = {
+                    enabled: 0
+                },
+                mid_freq, sr, dsq_msg, cmd_4bit;
+            findMode = e.innerHTML;
+            if (findMode == "Lock") findMode = 'snr';
+            if (findMode == "Spectrum") findMode = 'spectrum';
+            channelList.length = 0;
+            dmd = sat_list_array[selSAT.selectedIndex].sat_mode;
+            if (selTP.length > 0) {
+                // console.log("SAT=" + selSAT.selectedIndex + " tp=" + selTP.selectedIndex + " low=" + sat_list_array[selSAT.selectedIndex].lnb_low_freq);
+                mid_freq = dvbs_calc_mid_freq(tp_list_array[selTP.selectedIndex], sat_list_array[selSAT.selectedIndex], tone);
+                sr = tp_list_array[selTP.selectedIndex].sr;
+                if (sr < 9) mid_freq = tp_list_array[selTP.selectedIndex].freq;
+                if (findMode != 'snr') sr = 63000;
+                /* diseqc */
+                dsq_msg = "";
+                pow = tp_list_array[selTP.selectedIndex].polarity; //$('#power').val();
+                // console.log(pow);
+                pol_ = (pow == 'auto' ? tp_list_array[selTP.selectedIndex].polarity : (pow == '13V' ? '1' : '0'));
+                if (sat_list_array[selSAT.selectedIndex].diseqc10_port > 0) {
+                    if (tone.enabled > 0) dsq_msg = "W20,";
+                    dsq_msg += "E01038";
+                    cmd_4bit = 0xF0 + (sat_list_array[selSAT.selectedIndex].diseqc10_port - 1) * 4 + (1 - pol_) * 2 + tone.enabled;
+                    dsq_msg += cmd_4bit.toString(16).toUpperCase();
+                }
+                if (sat_list_array[selSAT.selectedIndex].diseqc11_port > 0 && sat_list_array[selSAT.selectedIndex].diseqc11_port <= 16) {
+                    if (dsq_msg != "") {
+                        dsq_msg += ",W20,E01039";
+                    }
+                    else {
+                        if (tone.enabled > 0) dsq_msg = "W20,";
+                        dsq_msg += "E01039";
+                    }
+                    cmd_4bit = 0xF0 + (sat_list_array[selSAT.selectedIndex].diseqc11_port - 1);
+                    dsq_msg += cmd_4bit.toString(16).toUpperCase();
+                    /* example: (35).toString(16,2).padStart(2, "0 ").toUpperCase()) */
+                }
+                if (dsq_msg != "") {
+                    if (tone.enabled > 0) dsq_msg += ",W20";
+                }
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=initSmartSNR&state=on&mode=' + findMode + '&freq=' + mid_freq + '&sr=' + sr + '&pol=' + tp_list_array[selTP.selectedIndex].polarity + '&tone=' + tone.enabled + '&smart_lnb_enabled=' + '1' + '&dmd=' + dmd + '&diseqc_hex=' + dsq_msg + (findMode == 'spectrum' ? '&fft=4133' : ''), false);
+                //            http://192.168.100.128/public?command=initSmartSNR&state=on&mode=snr&freq=1120&sr=28800&pol=0&tone=1&smart_lnb_enabled=1&dmd=0&diseqc_hex=W20,E01038F3,W20,E01039F3,W20
+                //            http://192.168.100.128/public?command=initSmartSNR&state=on&mode=snr&freq=1120&sr=28800&pol=0&tone=1&smart_lnb_enabled=1&dmd=0&diseqc_hex=W20,E01038F3,W20,E01039F3,W20
+                xhr.send();
+                if (xhr.status != 200) { // Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð¾ÑˆÐ¸Ð±ÐºÑƒ
+                    //alert(xhr.status + ': ' + xhr.statusText); // Ð²Ñ‹Ð²Ð¾Ð´: 404: Not Found
+                    $("finder").style.display = "none";
+                    $("debug").style.display = "none";
+                    // document.getElementById("finder_mode").style.display = "inline";
+                }
+            }
+        }
+
+        function tpListSelectedAhmed(mid_freq, sr, polarity) {
+            var tone = {
+                    enabled: 0
+                },
+                dsq_msg, cmd_4bit;
+            findMode = e.innerHTML;
+            if (findMode == "Lock") findMode = 'snr';
+            if (findMode == "Spectrum") findMode = 'spectrum';
+            channelList.length = 0;
+            dmd = sat_list_array[selSAT.selectedIndex].sat_mode;
+            if (!Number.isNaN(mid_freq)) {
+                // console.log("SAT=" + selSAT.selectedIndex + " tp=" + selTP.selectedIndex + " low=" + sat_list_array[selSAT.selectedIndex].lnb_low_freq);
+                mid_freq = dvbs_calc_mid_freq({"freq": mid_freq, 'polarity': polarity}, sat_list_array[selSAT.selectedIndex], tone);
+
+                if (findMode != 'snr') sr = 63000;
+                /* diseqc */
+                dsq_msg = "";
+                pow = polarity; //$('#power').val();
+                // console.log(pow);
+                pol_ = (pow == 'auto' ? polarity : (pow == '13V' ? '1' : '0'));
+                if (sat_list_array[selSAT.selectedIndex].diseqc10_port > 0) {
+                    if (tone.enabled > 0) dsq_msg = "W20,";
+                    dsq_msg += "E01038";
+                    cmd_4bit = 0xF0 + (sat_list_array[selSAT.selectedIndex].diseqc10_port - 1) * 4 + (1 - pol_) * 2 + tone.enabled;
+                    dsq_msg += cmd_4bit.toString(16).toUpperCase();
+                }
+                if (sat_list_array[selSAT.selectedIndex].diseqc11_port > 0 && sat_list_array[selSAT.selectedIndex].diseqc11_port <= 16) {
+                    if (dsq_msg != "") {
+                        dsq_msg += ",W20,E01039";
+                    }
+                    else {
+                        if (tone.enabled > 0) dsq_msg = "W20,";
+                        dsq_msg += "E01039";
+                    }
+                    cmd_4bit = 0xF0 + (sat_list_array[selSAT.selectedIndex].diseqc11_port - 1);
+                    dsq_msg += cmd_4bit.toString(16).toUpperCase();
+                    /* example: (35).toString(16,2).padStart(2, "0 ").toUpperCase()) */
+                }
+                if (dsq_msg != "") {
+                    if (tone.enabled > 0) dsq_msg += ",W20";
+                }
+                if (!Number.isNaN(mid_freq)) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=initSmartSNR&state=on&mode=' + findMode + '&freq=' + mid_freq + '&sr=' + sr + '&pol=' + polarity + '&tone=' + tone.enabled + '&smart_lnb_enabled=' + '1' + '&dmd=' + dmd + '&diseqc_hex=' + dsq_msg + (findMode == 'spectrum' ? '&fft=4133' : ''), false);
+                    //            http://192.168.100.128/public?command=initSmartSNR&state=on&mode=snr&freq=1120&sr=28800&pol=0&tone=1&smart_lnb_enabled=1&dmd=0&diseqc_hex=W20,E01038F3,W20,E01039F3,W20
+                    //            http://192.168.100.128/public?command=initSmartSNR&state=on&mode=snr&freq=1120&sr=28800&pol=0&tone=1&smart_lnb_enabled=1&dmd=0&diseqc_hex=W20,E01038F3,W20,E01039F3,W20
+                    xhr.send();
+                    if (xhr.status != 200) { // Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð¾ÑˆÐ¸Ð±ÐºÑƒ
+                        //alert(xhr.status + ': ' + xhr.statusText); // Ð²Ñ‹Ð²Ð¾Ð´: 404: Not Found
+                        $("finder").style.display = "none";
+                        $("debug").style.display = "none";
+                        // document.getElementById("finder_mode").style.display = "inline";
+                    }
+                }
+            }
+        }
+        //=========================================================================================
+        function changeFindModeFunction() {
+            if (e.innerHTML == 'Lock') {
+                e.innerHTML = 'Spectrum';
+            }
+            else {
+                e.innerHTML = 'Lock'
+            };
+            //    findMode = e.innerHTML;
+            tpListSelected();
+            c_ahmed();
+            if (e.innerHTML == 'Lock') {
+                b.hidden = true;
+                c.hidden = true;
+                d.hidden = false;
+                f.hidden = false;
+                //  g.hidden = true;
+            }
+            else {
+                b.hidden = false;
+                c.hidden = false;
+                d.hidden = true;
+                f.hidden = true;
+                //  g.hidden = false;
+            }
+        }
+        //=========================================================================================
+        function onCreateReportFunction() {
+            if (pu == 0) return;
+            console.log("=" + selSAT.selectedIndex);
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=createReport&sat_id=' + selSAT.value, false);
+            xhr.send();
+        }
+        //=========================================================================================
+        function onUpdateSettingsFunction() {
+            if (pu == 0) return;
+            var settings = {
+                "mediacenter": {
+                    "record": {
+                        "timeshift": "false",
+                        "disk_partition": "C"
+                    }
+                },
+                "system": {
+                    "language": {
+                        "osd": "eng",
+                        "first_audio": "eng",
+                        "secondary_audio": "ara",
+                        "subtitles": "eng"
+                    },
+                    "audio_video": {
+                        "tv_system": "PAL",
+                        "resolution": "1080i",
+                        "aspect": "16:9",
+                        "effects": "default",
+                        "audio_out": "LPCM"
+                    },
+                    "time": {
+                        "gmt": "true",
+                        "timezone": "003:00",
+                        "summertime": "false"
+                    },
+                    "messages": {
+                        "subtitles": "false",
+                        "infobanner_time": 5,
+                        "infobanner_transperancy": 30
+                    }
+                }
+            };
+            xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://' + storage.getItem("stb-ip") + '/public?command=updateConfig', false);
+            xhr.send(JSON.stringify(settings));
+        }
+        //=========================================================================================
+        function onGetCardInfoFunction() {
+            if (pu == 0) return;
+            console.log("=" + selSAT.selectedIndex);
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=smartcardInfo', false);
+            xhr.send();
+        }
+        //=========================================================================================
+        function onBlindScanFunction() {
+            if (pu == 0) return;
+            var tone = {
+                    enabled: 0
+                },
+                mid_freq, sr;
+            channelList.length = 0;
+            dmd = sat_list_array[selSAT.selectedIndex].sat_mode;
+            if (selTP.length > 0) {
+                console.log("SAT=" + selSAT.selectedIndex + " tp=" + selTP.selectedIndex + " low=" + sat_list_array[selSAT.selectedIndex].lnb_low_freq);
+                mid_freq = dvbs_calc_mid_freq(tp_list_array[selTP.selectedIndex], sat_list_array[selSAT.selectedIndex], tone);
+                sr = tp_list_array[selTP.selectedIndex].sr;
+                if (sr < 9) mid_freq = tp_list_array[selTP.selectedIndex].freq;
+                if (findMode != 'snr') sr = 63000;
+                /* diseqc */
+                dsq_msg = "";
+                pow = tp_list_array[selTP.selectedIndex].polarity; //$('#power').val();
+                console.log(pow);
+                pol_ = (pow == 'auto' ? tp_list_array[selTP.selectedIndex].polarity : (pow == '13V' ? '1' : '0'));
+                if (sat_list_array[selSAT.selectedIndex].diseqc10_port > 0) {
+                    if (tone.enabled > 0) dsq_msg = "W20,";
+                    dsq_msg += "E01038";
+                    cmd_4bit = 0xF0 + (sat_list_array[selSAT.selectedIndex].diseqc10_port - 1) * 4 + (1 - pol_) * 2 + tone.enabled;
+                    dsq_msg += cmd_4bit.toString(16).toUpperCase();
+                }
+                if (sat_list_array[selSAT.selectedIndex].diseqc11_port > 0 && sat_list_array[selSAT.selectedIndex].diseqc11_port <= 16) {
+                    if (dsq_msg != "") {
+                        dsq_msg += ",W20,E01039";
+                    }
+                    else {
+                        if (tone.enabled > 0) dsq_msg = "W20,";
+                        dsq_msg += "E01039";
+                    }
+                    cmd_4bit = 0xF0 + (sat_list_array[selSAT.selectedIndex].diseqc11_port - 1);
+                    dsq_msg += cmd_4bit.toString(16).toUpperCase();
+                    /* example: (35).toString(16,2).padStart(2, "0 ").toUpperCase()) */
+                }
+                if (dsq_msg != "") {
+                    if (tone.enabled > 0) dsq_msg += ",W20";
+                }
+                findMode = "blindscan";
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=initSmartSNR&state=on&mode=' + findMode + '&freq=' + mid_freq + '&sr=' + sr + '&pol=' + tp_list_array[selTP.selectedIndex].polarity + '&tone=' + tone.enabled + '&smart_lnb_enabled=' + '1' + '&dmd=' + dmd + '&diseqc_hex=' + dsq_msg + (findMode == 'spectrum' ? '&fft=4133' : ''), false);
+                xhr.send();
+                if (xhr.status != 200) { // Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð¾ÑˆÐ¸Ð±ÐºÑƒ
+                    alert(xhr.status + ': ' + xhr.statusText); // Ð²Ñ‹Ð²Ð¾Ð´: 404: Not Found
+                    $("finder").style.display = "none";
+                    $("debug").style.display = "none";
+                    //  document.getElementById("finder_mode").style.display = "inline";
+                }
+            }
+        }
+        //=========================================================================================
+        function onChannelsScanFunction() {
+            if (pu == 0) return;
+            var tone = {
+                    enabled: 0
+                },
+                mid_freq, sr;
+            channelList.length = 0;
+            if (selTP.length > 0) {
+                console.log("SAT=" + selSAT.selectedIndex + " tp=" + selTP.selectedIndex + " low=" + sat_list_array[selSAT.selectedIndex].lnb_low_freq);
+                findMode = "channelsscan";
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://' + storage.getItem("stb-ip") + '/public?command=scanChannels&sat_id=' + sat_list_array[selSAT.selectedIndex].sat_id + '&tp_id=' + tp_list_array[selTP.selectedIndex].id + '&free_only=false' + '&nit=false' + '&channel_type=all' + '&mode=sat', false);
+                /*
+                    channel_type: "all", "tv", "radio"
+                    mode:         "blindsat", "sat", "tp"
+                */
+                xhr.send();
+                if (xhr.status != 200) { // Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð¾ÑˆÐ¸Ð±ÐºÑƒ
+                    alert(xhr.status + ': ' + xhr.statusText); // Ð²Ñ‹Ð²Ð¾Ð´: 404: Not Found
+                    $("finder").style.display = "none";
+                    $("debug").style.display = "none";
+                    //  document.getElementById("finder_mode").style.display = "inline";
+                }
+            }
+        }
+        //----------------------------------------------------------------
+        function drawTPBandwidth() {
+            if (selTP.length > 0) {
+                sr = tp_list_array[selTP.selectedIndex].sr / 1000 * 1.2 * 1.25;
+                ctx.fillStyle = 'rgba(0, 0, 200, 0.1)';
+                ctx.fillRect((fft_read_size * 400 / 480) / 2 - sr / 2 * (fft_read_size * 400 / 480) / 90, 0, sr * (fft_read_size * 400 / 480) / 90, c.height);
+                //          delete after debug fft_read_size/90
+            };
+            ss = sr;
+            return ss;
+        }
+        //------------------------------------------------------------------------------------
+        function dvbs_detect_lnb_freq(freq) {
+            var DVBS_KU_BAND_MIN_MHZ = 8600,
+                DVBS_KU_BAND_MAX_MHZ = 11800,
+                DVBS_C_BAND_MIN_MHZ = 4650,
+                DVBS_C_BAND_MAX_MHZ = 6350;
+            var KU_BAND = 0,
+                C_BAND = 1;
+            if (freq > DVBS_KU_BAND_MIN_MHZ && freq < DVBS_KU_BAND_MAX_MHZ) {
+                return KU_BAND;
+            }
+            if (freq > DVBS_C_BAND_MIN_MHZ && freq < DVBS_C_BAND_MAX_MHZ) {
+                return C_BAND;
+            }
+            return 0;
+        }
+        //------------------------------------------------------------------------------------
+        function dvbs_calc_mid_freq(tp, sat, tone) {
+            var DVBS_LNB_STANDARD = 0,
+                DVBS_LNB_USER = 1,
+                DVBS_LNB_UNIVERSAL = 2;
+            var UNS_LOW_LIMIT = 11700;
+            var KU_BAND = 0,
+                C_BAND = 1;
+            var mid_freq = 0;
+            var polarity = 0;
+            var k22 = 0;
+            var temp = 0;
+            mid_freq = tp.freq;
+            polarity = tp.polarity;
+            if (DVBS_LNB_STANDARD == sat.lnb_type) {
+                if (C_BAND == dvbs_detect_lnb_freq(sat.lnb_low_freq)) {
+                    temp = sat.lnb_low_freq - tp.freq;
+                }
+                else {
+                    temp = tp.freq - sat.lnb_low_freq;
+                }
+            }
+            else if (DVBS_LNB_USER == sat.lnb_type) {
+                if (0 == tp.polarity) {
+                    temp = sat.lnb_low_freq - tp.freq;
+                }
+                else if (tp.polarity == 1) {
+                    temp = sat.lnb_high_freq - tp.freq;
+                }
+            }
+            else if (DVBS_LNB_UNIVERSAL == sat.lnb_type) {
+                k22 = (tp.freq > UNS_LOW_LIMIT) ? 1 : 0;
+                tone.enabled = k22;
+                if (0 == k22) {
+                    temp = tp.freq - sat.lnb_low_freq;
+                }
+                else if (1 == k22) {
+                    temp = tp.freq - sat.lnb_high_freq;
+                }
+            }
+            return temp;
+        }
+        //------------------------------------------------------------------------------------
+        function dvbs_calc_tp_freq(rf, tp, sat, tone) {
+            var DVBS_LNB_STANDARD = 0,
+                DVBS_LNB_USER = 1,
+                DVBS_LNB_UNIVERSAL = 2;
+            var UNS_LOW_LIMIT = 11700;
+            var KU_BAND = 0,
+                C_BAND = 1;
+            var rf_freq = 0;
+            var polarity = 0;
+            var k22 = 0;
+            var temp = 0;
+            polarity = tp.polarity;
+            if (DVBS_LNB_STANDARD == sat.lnb_type) {
+                if (C_BAND == dvbs_detect_lnb_freq(sat.lnb_low_freq)) {
+                    temp = sat.lnb_low_freq - rf;
+                }
+                else {
+                    temp = rf + sat.lnb_low_freq;
+                }
+            }
+            else if (DVBS_LNB_USER == sat.lnb_type) {
+                if (0 == tp.polarity) {
+                    temp = sat.lnb_low_freq - rf;
+                }
+                else if (tp.polarity == 1) {
+                    temp = sat.lnb_high_freq - rf;
+                }
+            }
+            else if (DVBS_LNB_UNIVERSAL == sat.lnb_type) {
+                k22 = (tp.freq > UNS_LOW_LIMIT) ? 1 : 0;
+                tone.enabled = k22;
+                if (0 == k22) {
+                    temp = rf + sat.lnb_low_freq;
+                }
+                else if (1 == k22) {
+                    temp = rf + sat.lnb_high_freq;
+                }
+            }
+            return temp;
+        }
+        //==============================================================================
+        function getIPFunction() {
+            if (addr.value == "") {
+                addr.placeholder = adr;
+                addr.value = adr;
+            }
+            else {
+                //   if (+amoun.value < 0.1) amoun.value = 0.1;
+                addr.placeholder = addr.value;
+                adr = addr.value;
+                storage.setItem("stb-ip", adr);
+                $("status").style.color = "orangered";
+                $("status").innerHTML = 'Not Connected';
+                console.log(adr);
+                console.log("restart page")
+                document.location.href = "finder-4.3_api1.7.html";
+            }
+        }
+        //------------------------------------------------------------------------------------
+        function get_db() {
+            return stb_cfg;
+        }
+        //------------------------------------------------------------------------------------
+        function $(z) {
+            return document.getElementById(z);
+        }
+        //------------------------------------------------------------------------------------
+    </script>
+</body>
+
+</html>
